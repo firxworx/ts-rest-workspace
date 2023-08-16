@@ -1,14 +1,87 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# compiled output
-dist
-tmp
-/out-tsc
+# app fonts per @fontsource-derived conventions
+apps/**/public/fonts/**/*.css
+!apps/**/public/fonts/**/app.css
+apps/**/public/fonts/**/files
+
+# app i18n files for front-end ui's per i18next-derived conventions
+apps/**/public/locales/**/*.json
+!apps/**/public/locales/**/app-*.json
+!apps/**/public/locales/**/translation.json
+
+# tbd how to handle these (locate on s3 with local cache?)
+media/*
+!media/prototyping/
+media/prototyping/*
+!media/prototyping/images/
+media/prototyping/images/*
+!media/prototyping/images/avatars/
 
 # dependencies
 node_modules
+/.pnp
+.pnp.js
 
-# IDEs and editors
+# environment
+.env
+.env.*
+!.env.sample
+
+# secrets
+*.pem
+*.key
+*.csr
+
+# nx cloud credentials
+/nx-cloud.env
+
+# framework
+.astro
+.next
+/.next/
+/out/
+
+# compiled output
+bin
+dist
+tmp
+/out-tsc
+/build
+
+# coverage and related tools such as instanbul
+/coverage
+.nyc_output
+lib-cov
+*.lcov
+
+# dev workflow such as output of rollup-plugin-visualizer
+stats.html
+
+# workflow
+wip
+notes
+
+# diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# aws-cdk output
+.cdk.staging
+cdk.out
+
+# aws-cdk app
+apps/**/infra/**/*.{js,mjs,cjs}
+!apps/**/infra/jest.*.js
+apps/**/infra/**/*.d.ts
+node_modules
+
+# ide's + editors
 /.idea
 .project
 .classpath
@@ -17,23 +90,29 @@ node_modules
 .settings/
 *.sublime-workspace
 
-# IDE - VSCode
+# vscode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# deploy + database
+.serverless/
+.fusebox/
+.dynamodb/
+.elasticbeanstalk
+.ebextensions
+
 # misc
+.npm
 /.sass-cache
+.eslintcache
 /connect.lock
-/coverage
 /libpeerconnection.log
 npm-debug.log
 yarn-error.log
 testem.log
 /typings
-
-# System Files
-.DS_Store
-Thumbs.db
+.yarn-integrity
+*.tsbuildinfo
