@@ -2,6 +2,5 @@
   "name": "@rfx/common-contracts",
   "version": "0.0.1",
   "dependencies": {},
-  "type": "commonjs",
-  "main": "./index.cjs"
+  "sideEffects": false
 }

@@ -1,1 +1,1 @@
-export * from './lib/common-contracts'
+export * from './lib/blog/blog.contract'

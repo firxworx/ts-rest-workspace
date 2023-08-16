@@ -13,7 +13,7 @@
         "tsConfig": "packages/common/contracts/tsconfig.lib.json",
         "assets": ["packages/common/contracts/*.md"],
         "generatePackageJson": true,
-        "format": ["cjs"]
+        "format": ["esm", "cjs"]
       }
     },
     "publish": {
