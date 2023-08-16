@@ -13,10 +13,10 @@ export const mockPostFixtureFactory = (partial: Partial<Post>): Post => ({
   ...partial,
 })
 
+/**
+ * Implement the blog contract as a router using mock data.
+ */
 export default async function (fastify: FastifyInstance): Promise<void> {
-  // fastify.get('/', async function (_request: FastifyRequest, _reply: FastifyReply) {
-  //   return { message: 'Hello API' }
-  // })
   const s = initServer()
 
   const router = s.router(apiBlog, {
