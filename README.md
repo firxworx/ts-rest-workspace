@@ -1,62 +1,108 @@
 # Nx with Fastify API and React UI via ts-rest
 
-An [Nx](https://nx.dev) monorepo featuring a [Fastify](https://fastify.dev/) back-end and [React](https://react.dev/) front-end that exchange data via [ts-rest](https://ts-rest.com/).
+An [Nx](https://nx.dev) monorepo featuring a [Fastify](https://fastify.dev/) back-end API and [React](https://react.dev/) front-end that exchange data via [ts-rest](https://ts-rest.com/).
 
-ts-rest offers comparable benefits to developer experience and developer efficiency vs. [TRPC](https://trpc.io/) except it is implementing using a mature protocol.
+API documentation based on the ts-rest contract is generated via Swagger/OpenAPI.
+
+ts-rest offers comparable benefits to developer efficiency and developer experience vs. [TRPC](https://trpc.io/) except it is implementing using JSON/REST under the hood.
+
+ts-rest includes support for Express/Fastify/NestJS and React/Vue and is designed to support incremental adoption by development teams working with legacy codebases.
+
+### About this Repo
+
+The code in this repo can serve as a reference boilerplate/template for new full-stack projects.
+
+The official examples in the ts-rest repo are somewhat intermixed meanwhile this repo provides a structure that is consistent with a real application. The Fastify API structure is based on the Nx generator boilerplate vs. the example which provides a more scalable foundation to build new features. 
+
+The implementation of the blog is a non-functional mock sourced from examples in the ts-rest GitHub repo: 
+https://github.com/ts-rest/ts-rest/tree/main/apps
+
+The UI is created using Vite + React + TypeScript + TailwindCSS. It includes examples of both the fetch-based and react-query-based client libraries provided by ts-rest.
+
+The shared contract between the client + server is defined in `packages/common/contracts`.
 
 ## Architecture Value
 
-ts-rest is arguably superior strategic choice for client-server communications in real-world business applications vs. newer protocols such as TRPC and GraphQL.
+ts-rest is arguably superior strategic choice for client-server communications in most types of real-world business applications vs. newer protocols such as TRPC, gRPC, and GraphQL.
 
-Real-world companies of all sizes across the vast majority of industries benefit from internet-standards that are widely-supported, well-understood, and straightforward for customers and partners to interface and integrate with.
+There can be many advantages to embracing mature, widely-supported, and well-understood protocols that are easy to implement and maintain. 
 
-There is no greater ecosystem of tools, libraries, and expertise than REST-like API's and this is unlikely to change in the foreseeable future.
+Internal stakeholders, customers, and partners across any industry can easily integrate with JSON REST API's and the _largest_ ecosystem of software and tools are at their disposal.
 
-ts-rest provides developers with a highly productive TRPC-like experience that enhances developer efficiency by eliminating duplication and delivering end-to-end type safety.
+ts-rest provides developers with a highly productive TRPC-like experience that enhances developer efficiency and delivers end-to-end type safety: https://ts-rest.com/docs/intro
 
-## Start the app
+## Development
 
-To start the development server run `pnpm nx serve react-ui`. Open your browser and navigate to http://localhost:4200/. Happy coding!
+### Development Setup
 
-## Generate code
+The project assumes a linux/unix environment (Windows users can use WSL2) that includes pnpm and a recent version of NodeJS.
 
-If you happen to use Nx plugins, you can leverage code generators that might come with it.
+Copy `nx-cloud.env.sample` to create `nx-cloud.env`. 
 
-Run `nx list` to get a list of available plugins and whether they have generators. Then run `nx list <plugin-name>` to see what generators are available.
+Consider signing up for an Nx Cloud Account to provide an API key.
+If would not like to connect to Nx Cloud, edit `nx.json` and replace the `tasksRunnerOptions` block with the following:
 
-Learn more about [Nx generators on the docs](https://nx.dev/plugin-features/use-code-generators).
+```json
+    "tasksRunnerOptions": {
+      "default": {
+        "runner": "nx/tasks-runners/default",
+        "options": {
+          "cacheableOperations": ["build", "lint", "test", "e2e"],
+        },
+      },
+    },
+```
 
-## Running tasks
+Copy `.env.sample` to create `.env` for each of: `apps/fastify-api` and `apps/react-ui`.
+
+### Development Workflow
+
+Run `pnpm install` to install dependencies.
+
+Run `pnpm dev` to start the development server for both the API and UI.
+
+The API runs on port 3939 and the UI runs on port 4200.
+
+A proxy configuration in `apps/react-ui/proxy.conf.json` will proxy requests to http://127.0.0.1:4200/api to the back-end API.
+
+If you make a change to the contract it is recommended to restart the development server. If your changes still don't seem to get picked up try rebuilding.
+
+## Build
+
+Run `pnpm build:all` to build the API, UI, and the shared package containing the contract.
+
+The shared contract library is configured as a "publishable" package.
+
+The package's configuration is an example of how to configure Nx's esbuild builder to compile for both CommonJS and ESM.
+
+## Using Nx to Run Tasks
+
+The following is retained from the Nx boilerplate README.
 
 To execute tasks with Nx use the following syntax:
 
 ```
-nx <target> <project> <...options>
+pnpm nx <target> <project> <...options>
 ```
 
 You can also run multiple targets:
 
 ```
-nx run-many -t <target1> <target2>
+pnpm nx run-many -t <target1> <target2>
 ```
 
 ..or add `-p` to filter specific projects
 
 ```
-nx run-many -t <target1> <target2> -p <proj1> <proj2>
+pnpm nx run-many -t <target1> <target2> -p <proj1> <proj2>
 ```
 
-Targets can be defined in the `package.json` or `projects.json`. Learn more [in the docs](https://nx.dev/core-features/run-tasks).
+Targets can be defined in the `package.json` or `projects.json`.
+Learn more [in the docs](https://nx.dev/core-features/run-tasks).
 
-## Want better Editor Integration?
+Check out the [Nx Console extensions](https://nx.dev/nx-console) for VSCode extensions and other tools for working with Nx.
 
-Have a look at the [Nx Console extensions](https://nx.dev/nx-console). It provides autocomplete support, a UI for exploring and running tasks & generators, and more! Available for VSCode, IntelliJ and comes with a LSP for Vim users.
-
-## Ready to deploy?
-
-Just run `nx build demoapp` to build the application. The build artifacts will be stored in the `dist/` directory, ready to be deployed.
-
-## Set up CI!
+## Set up CI
 
 Nx comes with local caching already built-in (check your `nx.json`). On CI you might want to go a step further.
 
@@ -64,8 +110,3 @@ Nx comes with local caching already built-in (check your `nx.json`). On CI you m
 - [Set up task distribution across multiple machines](https://nx.dev/core-features/distribute-task-execution)
 - [Learn more how to setup CI](https://nx.dev/recipes/ci)
 
-## Connect with us!
-
-- [Join the community](https://nx.dev/community)
-- [Subscribe to the Nx Youtube Channel](https://www.youtube.com/@nxdevtools)
-- [Follow us on Twitter](https://twitter.com/nxdevtools)

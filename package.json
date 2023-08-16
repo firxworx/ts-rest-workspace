@@ -1,7 +1,7 @@
 {
   "name": "@rfx-nx-ts-rest/source",
   "version": "0.0.0",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "dev": "NODE_OPTIONS=\"--max-old-space-size=2048\" nx run-many --target=serve --projects=fastify-api,react-ui --parallel",
