@@ -1,6 +1,10 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "strict": true,
+    "target": "es2020",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
@@ -8,9 +12,6 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
-    "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
