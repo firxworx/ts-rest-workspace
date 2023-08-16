@@ -4,7 +4,7 @@
   "plugins": ["@nx"],
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx", "*.cjs", "*.mjs"],
       "rules": {
         "@nx/enforce-module-boundaries": [
           "error",
@@ -18,13 +18,34 @@
               }
             ]
           }
+        ],
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          {
+            "argsIgnorePattern": "^_",
+            "varsIgnorePattern": "^_",
+            "caughtErrorsIgnorePattern": "^_"
+          }
         ]
       }
     },
     {
       "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nx/typescript"],
-      "rules": {}
+      "rules": {
+        "@typescript-eslint/no-empty-interface": "off",
+
+        // a common pattern in clsx and similar libraries is to use computed keys
+        "no-useless-computed-key": "off",
+
+        // require explicit declaration of function returns even for react -- deal with it :)
+        "@typescript-eslint/explicit-function-return-type": [
+          "error",
+          {
+            "allowExpressions": true
+          }
+        ]
+      }
     },
     {
       "files": ["*.js", "*.jsx"],
