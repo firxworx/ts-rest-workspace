@@ -23,6 +23,7 @@
     "@fastify/sensible": "~5.2.0",
     "@fastify/swagger": "^8.8.0",
     "@fastify/swagger-ui": "^1.9.3",
+    "@roarr/cli": "^5.12.3",
     "@swc/helpers": "~0.5.0",
     "@tanstack/react-query": "^4.32.6",
     "@tanstack/react-query-devtools": "^4.32.6",
