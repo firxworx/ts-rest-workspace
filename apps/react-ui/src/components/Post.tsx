@@ -31,7 +31,7 @@ export function Post({ postId }: PostProps): JSX.Element {
 
   if (error) {
     return (
-      <div className="prose w-full h-full flex flex-row justify-center items-center">
+      <div className="prose flex h-full w-full flex-row items-center justify-center">
         <div>
           <h1>Post not found!</h1>
         </div>
@@ -41,7 +41,7 @@ export function Post({ postId }: PostProps): JSX.Element {
 
   if (isLoading) {
     return (
-      <div className="prose w-full h-full flex flex-row justify-center items-center">
+      <div className="prose flex h-full w-full flex-row items-center justify-center">
         <div>
           <h1>Loading...</h1>
           <progress className="progress w-56"></progress>
@@ -55,15 +55,15 @@ export function Post({ postId }: PostProps): JSX.Element {
   return (
     <div>
       {post ? (
-        <div className="prose max-w-none mx-auto px-2 sm:px-0">
-          <div className="flex flex-col gap-4 sm:flex-row mb-10">
+        <div className="prose mx-auto max-w-none px-2 sm:px-0">
+          <div className="mb-10 flex flex-col gap-4 sm:flex-row">
             <div className="flex flex-col">
-              <h1 className="text-3xl mb-2 font-bold tracking-tighter">{post.title}</h1>
+              <h1 className="mb-2 text-3xl font-bold tracking-tighter">{post.title}</h1>
               <h3 className="text-xl font-medium tracking-tight">{post.description}</h3>
             </div>
           </div>
           <p>{post.content}</p>
-          <div className="flex flex-row gap-2 mt-8">
+          <div className="mt-8 flex flex-row gap-2">
             {/*
             // not implemented for this example
             // note: beware of content type json and sending an empty body to the server (will reject)

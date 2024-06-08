@@ -1,14 +1,26 @@
 /// <reference types="vitest" />
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
+import tsconfigPaths from 'vite-tsconfig-paths'
+
+// uncomment if tailwind doesn't "get it"
+// import tailwindcss from 'tailwindcss'
 
 export default defineConfig({
-  cacheDir: '../../node_modules/.vite/react-ui',
+  // cacheDir: '../../node_modules/.vite/react-ui', // nx legacy
 
   server: {
     port: 4200,
     host: 'localhost',
+
+    proxy: {
+      '/api/': {
+        target: 'http://localhost:3939', // http://127.0.0.1:3939
+        secure: false,
+        changeOrigin: true,
+        // rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
   },
 
   preview: {
@@ -16,19 +28,17 @@ export default defineConfig({
     host: 'localhost',
   },
 
-  plugins: [react(), nxViteTsPaths()],
+  plugins: [react(), tsconfigPaths()],
 
-  // Uncomment this if you are using workers.
+  // uncomment if using workers
   // worker: {
-  //  plugins: [ nxViteTsPaths() ],
+  //  plugins: [ tsconfigPaths() ],
   // },
 
-  test: {
-    globals: true,
-    cache: {
-      dir: '../../node_modules/.vitest',
-    },
-    environment: 'jsdom',
-    include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-  },
+  // uncomment if tailwind doesn't work out-of-the-box
+  // css: {
+  //   postcss: {
+  //     plugins: [tailwindcss()],
+  //   },
+  // },
 })

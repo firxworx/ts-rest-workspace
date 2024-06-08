@@ -3,9 +3,15 @@ import * as ReactDOM from 'react-dom/client'
 
 import App from './App'
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
-root.render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+const mountNode = document.getElementById('root')
+
+if (mountNode) {
+  const root = ReactDOM.createRoot(mountNode)
+  root.render(
+    <StrictMode>
+      <App />
+    </StrictMode>,
+  )
+} else {
+  console.error("React mount point 'root' not found in document.")
+}

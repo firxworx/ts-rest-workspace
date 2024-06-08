@@ -38,38 +38,40 @@ export function Posts(): JSX.Element {
 
   return (
     <div>
-      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-        {posts.map((post) => (
-          <Link to={`/posts/${post.id}`} key={post.id}>
-            <div className="border border-slate-200 p-4 bg-slate-100 shadow-lg w-full hover:scale-105 transition cursor-pointer">
-              <div className="card-body">
-                <div className="flex flex-row justify-between">
-                  <h2 className="text-xl font-medium tracking-tighter mb-4">{post.title}</h2>
-                  <div>
-                    <div className="avatar placeholder">
-                      <div className="flex items-center justify-center bg-slate-200 rounded-full w-8 h-8">
-                        <span className="text-xs">AZ</span>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+        {posts.map(
+          (post): JSX.Element => (
+            <Link to={`/posts/${post.id}`} key={post.id}>
+              <div className="w-full cursor-pointer border border-slate-200 bg-slate-100 p-4 shadow-lg transition hover:scale-105">
+                <div className="card-body">
+                  <div className="flex flex-row justify-between">
+                    <h2 className="mb-4 text-xl font-medium tracking-tighter">{post.title}</h2>
+                    <div>
+                      <div className="avatar placeholder">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-200">
+                          <span className="text-xs">AZ</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <p>{post.description}?</p>
-                <div className="flex justify-end gap-2 text-xs">
-                  {post.tags.map((tag) => (
-                    <div key={tag} className="rounded-lg p-2 bg-slate-200">
-                      Fashion
-                    </div>
-                  ))}
+                  <p>{post.description}?</p>
+                  <div className="flex justify-end gap-2 text-xs">
+                    {post.tags.map((tag) => (
+                      <div key={tag} className="rounded-lg bg-slate-200 p-2">
+                        Fashion
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ),
+        )}
       </div>
       <div className="mt-8">
         <button
           disabled={!hasNextPage}
-          className={cn('bg-slate-800 text-white px-3 py-2 rounded-md', { 'btn-disabled': !hasNextPage })}
+          className={cn('rounded-md bg-slate-800 px-3 py-2 text-white', { 'btn-disabled': !hasNextPage })}
           onClick={() => fetchNextPage()}
         >
           Load more

@@ -8,15 +8,15 @@ export interface ContainerProps {
 }
 
 export function Container({ className, children }: ContainerProps): JSX.Element {
-  return <div className={cn('container mx-auto px-4 sm:px-6 max-w-6xl', className)}>{children}</div>
+  return <div className={cn('container mx-auto max-w-6xl px-4 sm:px-6', className)}>{children}</div>
 }
 
 export function Logo(): JSX.Element {
   return (
     <div
       className={cn(
-        'flex items-center justify-center py-2 px-3 rounded-lg',
-        'border border-dotted bg-slate-50 border-slate-400',
+        'flex items-center justify-center rounded-lg px-3 py-2',
+        'border border-dotted border-slate-400 bg-slate-50',
         'text-sm font-thin text-slate-800 opacity-80',
       )}
       aria-hidden="true"
@@ -28,9 +28,9 @@ export function Logo(): JSX.Element {
 
 export function AppLayout(): JSX.Element {
   return (
-    <div className="flex flex-col w-full min-h-screen z-0">
+    <div className="z-0 flex min-h-screen w-full flex-col">
       <nav className="bg-slate-200">
-        <Container className="flex items-center gap-2 sm:gap-4 h-14 [&>a]:text-sky-900">
+        <Container className="flex h-14 items-center gap-2 sm:gap-4 [&>a]:text-sky-900">
           <Link to="/" aria-label="Logo Home Link">
             <Logo />
           </Link>
@@ -48,7 +48,7 @@ export function AppLayout(): JSX.Element {
         </Container>
       </main>
       <footer className="bg-slate-200">
-        <Container className="py-4 text-center text-slate-800/75 text-sm">
+        <Container className="py-4 text-center text-sm text-slate-800/75">
           &copy; {new Date().getFullYear()}&nbsp;Placeholder
         </Container>
       </footer>

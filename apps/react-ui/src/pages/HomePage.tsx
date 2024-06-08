@@ -3,9 +3,9 @@ import { Posts } from '../components/Posts'
 export function HomePage(): JSX.Element {
   return (
     <>
-      <h1 className="text-4xl tracking-tight font-bold mb-8">Home</h1>
+      <h1 className="mb-8 text-4xl font-bold tracking-tight">Home</h1>
       <p>Hello world&hellip;</p>
-      <h2 className="text-2xl tracking-tight font-semibold py-6 sm:py-8">Blog Posts</h2>
+      <h2 className="py-6 text-2xl font-semibold tracking-tight sm:py-8">Blog Posts</h2>
       <Posts />
     </>
   )

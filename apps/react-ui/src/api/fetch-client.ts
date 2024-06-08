@@ -1,6 +1,6 @@
 import { initClient } from '@ts-rest/core'
 
-import { apiBlog } from '@rfx/common-contracts'
+import { apiBlog } from '@workspace/contracts'
 import { API_URL } from '../constants'
 
 /**

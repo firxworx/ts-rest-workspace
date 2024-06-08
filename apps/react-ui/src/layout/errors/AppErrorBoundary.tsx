@@ -3,11 +3,11 @@ import { ErrorBoundary, type FallbackProps } from 'react-error-boundary'
 
 function ErrorFallback({ error, resetErrorBoundary }: FallbackProps): JSX.Element {
   return (
-    <div role="alert" className="mx-auto my-8 sm:my-12 max-w-2xl p-4 rounded-md bg-slate-100">
+    <div role="alert" className="mx-auto my-8 max-w-2xl rounded-md bg-slate-100 p-4 sm:my-12">
       <p>Something went wrong:</p>
-      <pre className="my-4 p-4 rounded-md text-red-800 font-mono">{error.message}</pre>
+      <pre className="my-4 rounded-md p-4 font-mono text-red-800">{error.message}</pre>
       <div className="flex gap-4">
-        <button onClick={resetErrorBoundary} className="rounded-md px-3 py-2 text-white bg-slate-700">
+        <button onClick={resetErrorBoundary} className="rounded-md bg-slate-700 px-3 py-2 text-white">
           Try Again
         </button>
       </div>

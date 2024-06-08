@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "composite": true,
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "types": ["vitest/globals", "vitest/importMeta", "vite/client", "node"]
+  },
+  "include": ["vite.config.ts"]
+}

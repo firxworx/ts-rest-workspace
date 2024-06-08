@@ -1,21 +1,39 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "allowJs": false,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
+    // explicit strict mode
     "strict": true,
-    "types": ["vite/client", "vitest"]
-  },
-  "files": [],
-  "include": [],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
+
+    // compilation
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    // import path alias
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
     },
-    {
-      "path": "./tsconfig.spec.json"
-    }
-  ],
-  "extends": "../../tsconfig.base.json"
+
+    // bundler mode
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    // disable lint rule to allow for common JSX props and type definition patterns
+    "exactOptionalPropertyTypes": false,
+
+    // additional types (may not be required in latest version)
+    "types": ["vite/client", "vitest", "vitest/globals", "vitest/importMeta"]
+
+    // tests may require
+    // "types": ["vitest/globals", "vitest/importMeta", "vite/client", "node"]
+  },
+  "include": ["../../reset.d.ts", "src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
