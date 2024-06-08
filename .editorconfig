@@ -1,23 +1,16 @@
-# Editor configuration, see http://editorconfig.org
+# Editor configuration -- see http://editorconfig.org
+
 root = true
 
 [*]
 charset = utf-8
 end_of_line = lf
-indent_style = space
-indent_size = 2
 insert_final_newline = true
 trim_trailing_whitespace = true
-
-[*.{js,cjs,mjs,jsx,ts,tsx}]
 indent_style = space
 indent_size = 2
 
-[*.{yml,yaml,json}]
-indent_style = space
-indent_size = 2
-
-[{Dockerfile,Dockerfile.*}]
+[*.{astro,js,jsx,ts,tsx,cjs,mjs,html,css,sass,scss,less,sh}]
 indent_style = space
 indent_size = 2
 
@@ -25,9 +18,31 @@ indent_size = 2
 indent_style = space
 indent_size = 4
 
-[*.md]
+# indent 4 is more official for php however 2 is a preference for compact code
+[*.php]
+indent_style = space
+indent_size = 2
+
+[*.sql]
+indent_style = space
+indent_size = 2
+
+[*.{xml,yml,yaml,json}]
+indent_style = space
+indent_size = 2
+
+[*.{md,mdx}]
+indent_style = space
+indent_size = 2
 max_line_length = off
 trim_trailing_whitespace = false
 
+[{Dockerfile,Dockerfile.*}]
+indent_style = space
+indent_size = 2
+
 [Makefile]
 indent_style = tab
+
+# [{*.txt,wp-config-sample.php,wp-config.php}]
+# end_of_line = crlf
