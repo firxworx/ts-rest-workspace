@@ -1,0 +1,112 @@
+{
+  // use project version of typescript in vscode
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  // disable telemetry for likely extensions
+  "aws.codeWhisperer.shareCodeWhispererContentWithAWS": false,
+  "amazonQ.telemetry": false,
+  "amazonQ.shareContentWithAWS": false,
+  "aws.telemetry": false,
+  "aws.toolkit.telemetry": false,
+  "cloudcode.enableTelemetry": false,
+  "codeQL.telemetry.enableTelemetry": false,
+  "gitlens.telemetry.enabled": false,
+  "redhat.telemetry.enabled": false,
+
+  // editor customization
+  "editor.guides.bracketPairs": true,
+  "editor.guides.highlightActiveIndentation": true,
+  "editor.guides.indentation": true,
+  "editor.guides.bracketPairsHorizontal": "active",
+
+  // copilot information security
+  // @see https://thakkarparth007.github.io/copilot-explorer/posts/copilot-internals.html
+  // @see https://thakkarparth007.github.io/copilot-explorer/codeviz/templates/code-viz.html#m7017&pos=187:9
+  // @see https://code.visualstudio.com/docs/languages/identifiers
+  "github.copilot.enable": {
+    "*": "false",
+    "plaintext": false,
+    "markdown": true,
+    "md": true,
+    "mdx": true,
+    "shellscript": true,
+    "json": true,
+    "jsonc": true,
+    "yaml": true,
+    "sql": false,
+    "html": true,
+    "css": true,
+    "scss": true,
+    "less": true,
+    "javascript": true,
+    "typescript": true,
+    "javascriptreact": true,
+    "typescriptreact": true,
+    "vue": true,
+    "graphql": false
+  },
+
+  "files.associations": {
+    // "*.mdx": "mdx",
+    ".env*": "plaintext",
+    "*.css": "tailwindcss",
+    "*.cjs": "javascript",
+    "*.mjs": "javascript"
+  },
+
+  // autocorrect eslint issues on save
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+
+  // ensure intellisense offers autocomplete for tailwind classes
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+
+  // comment out if you experience issues with vscode or eslint/prettier or json
+  "eslint.validate": ["json"],
+
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+
+  // set tailwind root font size to match preset so intellisense calculates correct px values for rem
+  // note 16 is the tailwindcss and html document default
+  "tailwindCSS.rootFontSize": 16,
+
+  "tailwindCSS.codeActions": true,
+
+  // exclude lockfile and node_modules content from CTRL+P search results
+  "search.exclude": {
+    "pnpm-lock.yaml": true,
+    "**/node_modules/*": true,
+    "tmp/*": true
+  },
+
+  // ensure vscode uses pnpm vs. npm
+  "npm.packageManager": "pnpm",
+
+  // https://github.com/microsoft/vscode-eslint/blob/main/README.md
+  "eslint.useFlatConfig": true,
+  "eslint.workingDirectories": [{ "mode": "auto" }],
+
+  // get eslint to use local node version instead of version bundled with vscode
+  "eslint.runtime": "node",
+
+  "conventionalCommits.scopes": ["env"]
+}
