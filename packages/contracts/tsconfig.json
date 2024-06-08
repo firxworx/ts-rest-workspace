@@ -1,0 +1,38 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    // explicit strict mode
+    "strict": true,
+
+    // output directory
+    "outDir": "dist",
+
+    // path aliases
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+
+    // build configuration
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ES2022"], // ["DOM", "DOM.Iterable"],
+
+    // preserve jsdoc comments for intellisense
+    "removeComments": false,
+
+    // generate types and their sourcemaps
+    "declaration": true,
+    "declarationMap": true,
+
+    // linting
+    "strictFunctionTypes": true,
+
+    // relax exact optional property types for friendlier type definitions for front-end patterns
+    "exactOptionalPropertyTypes": false
+
+    // "types": ["node", "vitest/globals"]
+  }
+  // "files": [],
+  // "include": []
+}

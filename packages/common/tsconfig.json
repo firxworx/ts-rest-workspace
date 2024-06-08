@@ -1,0 +1,44 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    // explicit strict mode
+    "strict": true,
+
+    // output directory
+    "outDir": "dist",
+    "rootDir": "src",
+
+    // path aliases
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+
+    // build configuration
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ES2022"], // ["DOM", "DOM.Iterable"],
+
+    // preserve jsdoc comments for intellisense
+    "removeComments": false,
+
+    // generate types and their sourcemaps
+    "declaration": true,
+    "declarationMap": true,
+
+    // linting
+    "strictFunctionTypes": true
+
+    // "types": ["node", "vitest/globals"]
+  },
+  "include": ["../../reset.d.ts", "src/**/*.d.ts", "src/**/*.ts"],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "test",
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts",
+    "src/**/test/**",
+    "vitest.config.ts"
+  ]
+}

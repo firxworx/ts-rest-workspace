@@ -1,10 +1,12 @@
-# common-contracts
+# @workspace/contracts
 
-This library was generated with [Nx](https://nx.dev).
+ts-rest contracts for the API.
 
 ## Building
 
-Run `nx build common-contracts` to build the library.
+There is no build any more... Nx was trashed.
+
+Run `pnpm --filter @workspace/contracts build` to build the library.
 
 The following properties were removed from the nx boilerplate `package.json` while the 'esm' format was added (in addition to 'cjs') to the esbuild configuration in `project.json`. Nx + esbuild should generate the appropriate values at build time.
 
