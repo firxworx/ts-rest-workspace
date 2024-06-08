@@ -2,9 +2,9 @@
   "compileOnSave": false,
   "compilerOptions": {
     "strict": true,
-    "target": "es2020",
+    "target": "es2022",
     "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "lib": ["es2022", "dom"],
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
@@ -13,11 +13,11 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "@rfx/common-contracts": ["packages/common/contracts/src/index.ts"]
-    }
+    "skipDefaultLibCheck": true
+    // "baseUrl": ".",
+    // "paths": {
+    //   "@rfx/common-contracts": ["packages/common/contracts/src/index.ts"]
+    // }
   },
   "exclude": ["node_modules", "tmp"]
 }
