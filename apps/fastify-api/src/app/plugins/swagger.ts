@@ -1,9 +1,9 @@
-import { FastifyInstance } from 'fastify'
+import type { FastifyInstance } from 'fastify'
 import fp from 'fastify-plugin'
 import fastifySwagger from '@fastify/swagger'
 import fastifySwaggerUI from '@fastify/swagger-ui'
 
-import { openApiDocument } from '../../docs'
+import { openApiDocument } from '../../docs.js'
 
 /**
  * Swagger/OpenAPI plugin for this app.
@@ -12,7 +12,7 @@ import { openApiDocument } from '../../docs'
  * @see https://github.com/fastify/fastify-swagger-ui
  */
 export default fp(async function (fastify: FastifyInstance) {
-  fastify
+  await fastify
     .register(fastifySwagger, {
       swagger: openApiDocument,
     })

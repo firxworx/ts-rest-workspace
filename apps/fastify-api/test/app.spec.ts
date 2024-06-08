@@ -1,12 +1,12 @@
-import Fastify, { FastifyInstance } from 'fastify'
-import { app } from './app'
+import Fastify, { type FastifyInstance } from 'fastify'
+import { app } from '../src/app/app.js'
 
 describe('GET /', () => {
   let server: FastifyInstance
 
-  beforeEach(() => {
+  beforeEach(async () => {
     server = Fastify()
-    server.register(app)
+    await server.register(app)
   })
 
   it('should respond with a message', async () => {

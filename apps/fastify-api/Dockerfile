@@ -12,7 +12,7 @@ ENV PORT=3000
 WORKDIR /app
 
 RUN addgroup --system fastify-api && \
-          adduser --system -G fastify-api fastify-api
+    adduser --system -G fastify-api fastify-api
 
 COPY dist/apps/fastify-api fastify-api
 RUN chown -R fastify-api:fastify-api .

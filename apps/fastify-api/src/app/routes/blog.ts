@@ -1,7 +1,7 @@
-import { FastifyInstance } from 'fastify'
+import type { FastifyInstance } from 'fastify'
 import { initServer } from '@ts-rest/fastify'
 
-import { apiBlog, type Post } from '@rfx/common-contracts'
+import { apiBlog, type Post } from '@workspace/contracts'
 
 export const mockPostFixtureFactory = (partial: Partial<Post>): Post => ({
   id: 'mock-id',
@@ -21,6 +21,8 @@ export default async function (fastify: FastifyInstance): Promise<void> {
 
   const router = s.router(apiBlog, {
     getPost: async ({ params: { id } }) => {
+      await new Promise((resolve) => setTimeout(resolve, 250))
+
       const post = mockPostFixtureFactory({ id })
 
       if (!post) {
@@ -36,6 +38,7 @@ export default async function (fastify: FastifyInstance): Promise<void> {
       }
     },
     getPosts: async ({ query }) => {
+      await new Promise((resolve) => setTimeout(resolve, 250))
       const posts = [mockPostFixtureFactory({ id: '1' }), mockPostFixtureFactory({ id: '2' })]
 
       return {
@@ -49,6 +52,7 @@ export default async function (fastify: FastifyInstance): Promise<void> {
       }
     },
     createPost: async ({ body }) => {
+      await new Promise((resolve) => setTimeout(resolve, 250))
       const post = mockPostFixtureFactory(body)
 
       return {
@@ -57,6 +61,7 @@ export default async function (fastify: FastifyInstance): Promise<void> {
       }
     },
     updatePost: async ({ body }) => {
+      await new Promise((resolve) => setTimeout(resolve, 250))
       const post = mockPostFixtureFactory(body)
 
       return {
@@ -65,12 +70,15 @@ export default async function (fastify: FastifyInstance): Promise<void> {
       }
     },
     deletePost: async () => {
+      await new Promise((resolve) => setTimeout(resolve, 250))
       return {
         status: 200,
         body: { message: 'Post deleted' },
       }
     },
     testPathParams: async ({ params }) => {
+      await new Promise((resolve) => setTimeout(resolve, 50))
+
       return {
         status: 200,
         body: params,
@@ -78,5 +86,5 @@ export default async function (fastify: FastifyInstance): Promise<void> {
     },
   })
 
-  fastify.register(s.plugin(router))
+  await fastify.register(s.plugin(router))
 }

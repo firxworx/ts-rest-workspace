@@ -1,16 +1,79 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "files": [],
-  "include": [],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.spec.json"
-    }
-  ],
+  // @see https://www.npmjs.com/package/fastify-tsconfig
+  // the package sets module and moduleResolution to NodeNext
+  // "extends": ["../../tsconfig.base.json", "fastify-tsconfig"],
+  "extends": ["../../tsconfig.base.json"],
   "compilerOptions": {
-    "esModuleInterop": true
+    "strict": true,
+
+    "outDir": "dist",
+
+    // path aliases
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+
+    // build configuration
+    "target": "ES2022",
+    "lib": ["ES2022"], // ["DOM", "DOM.Iterable"],
+
+    // recommended by fastify-tsconfig
+    // "module": "NodeNext",
+    // "moduleResolution": "NodeNext",
+
+    // include sourcemaps
+    "sourceMap": true,
+
+    // workspace root defaults
+    // "module": "ESNext",
+    // "moduleResolution": "Bundler",
+
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    // "allowImportingTsExtensions": true,
+    // "noEmit": true,
+
+    //
+    //     "moduleResolution": "Node", // "Node" | "Classic, must be nodenext or unspecified with module nodenext
+
+    // typescript
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "noEmit": true,
+    "incremental": true,
+    "jsx": "preserve",
+
+    // remove comments for smaller build
+    "removeComments": true,
+
+    // generate types and their sourcemaps
+    "declaration": true,
+    "declarationMap": true, // recommended for monorepos by fastify-tsconfig
+
+    // linting
+    "strictFunctionTypes": true,
+
+    // better compatibility with shared front-end/back-end contracts and ability to use Partial<T>
+    "exactOptionalPropertyTypes": false
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["**/*.{spec,test}.ts"],
+  "ts-node": {
+    "compilerOptions": {
+      "esModuleInterop": true
+    }
   }
+  // "references": [
+  //   {
+  //     "path": "./tsconfig.app.json"
+  //   },
+  //   {
+  //     "path": "./tsconfig.spec.json"
+  //   }
+  // ],
+  // "files": [],
+  // "include": []
 }
