@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compileOnSave": false,
+  "compilerOptions": {
+    // ensure this tsconfig cannot accidentally be used for a build
+    "noEmit": true
+  },
+  "include": [
+    "apps/**/*",
+    "packages/**/*",
+    "configs/**/*",
+    "reset.d.ts",
+    "*.config.ts",
+    "*.config.js",
+    "vitest.workspace.ts"
+  ]
+  // "exclude": ["templates/**/*"]
+}
