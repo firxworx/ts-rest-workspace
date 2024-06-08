@@ -1,5 +1,11 @@
 # Nx with Fastify API and React UI via ts-rest
 
+## UPDATE This branch kills nx and replaces it entirely with pnpm workspaces
+
+...Its suddenly so easy to bump packages to current, nothing breaks with each update, CJS vs. ESM issues to troubleshoot at every step are eliminated... Magic!
+
+## Old README
+
 An [Nx](https://nx.dev) monorepo featuring a [Fastify](https://fastify.dev/) back-end API and [React](https://react.dev/) front-end that exchange data via [ts-rest](https://ts-rest.com/).
 
 API documentation based on the ts-rest contract is generated via Swagger/OpenAPI.
@@ -8,13 +14,17 @@ ts-rest offers comparable benefits to developer efficiency and developer experie
 
 ts-rest includes support for Express/Fastify/NestJS and React/Vue and is designed to support incremental adoption by development teams working with legacy codebases.
 
+## Resources
+
+https://github.com/ts-rest/ts-rest (refer to examples under both apps and libs)
+
 ### About this Repo
 
 The code in this repo can serve as a reference boilerplate/template for new full-stack projects.
 
-The official examples in the ts-rest repo are somewhat intermixed meanwhile this repo provides a structure that is consistent with a real application. The Fastify API structure is based on the Nx generator boilerplate vs. the example which provides a more scalable foundation to build new features. 
+The official examples in the ts-rest repo are somewhat intermixed meanwhile this repo provides a structure that is consistent with a real application. The Fastify API structure is based on the Nx generator boilerplate vs. the example which provides a more scalable foundation to build new features.
 
-The implementation of the blog is a non-functional mock sourced from examples in the ts-rest GitHub repo: 
+The implementation of the blog is a non-functional mock sourced from examples in the ts-rest GitHub repo:
 https://github.com/ts-rest/ts-rest/tree/main/apps
 
 The UI is created using Vite + React + TypeScript + TailwindCSS. It includes examples of both the fetch-based and react-query-based client libraries provided by ts-rest.
@@ -25,7 +35,7 @@ The shared contract between the client + server is defined in `packages/common/c
 
 ts-rest is arguably superior strategic choice for client-server communications in most types of real-world business applications vs. newer protocols such as TRPC, gRPC, and GraphQL.
 
-There can be many advantages to embracing mature, widely-supported, and well-understood protocols that are easy to implement and maintain. 
+There can be many advantages to embracing mature, widely-supported, and well-understood protocols that are easy to implement and maintain.
 
 Internal stakeholders, customers, and partners across any industry can easily integrate with JSON REST API's and the _largest_ ecosystem of software and tools are at their disposal.
 
@@ -37,7 +47,7 @@ ts-rest provides developers with a highly productive TRPC-like experience that e
 
 The project assumes a linux/unix environment (Windows users can use WSL2) that includes pnpm and a recent version of NodeJS.
 
-Copy `nx-cloud.env.sample` to create `nx-cloud.env`. 
+Copy `nx-cloud.env.sample` to create `nx-cloud.env`.
 
 Consider signing up for an Nx Cloud Account to provide an API key.
 If would not like to connect to Nx Cloud, edit `nx.json` and replace the `tasksRunnerOptions` block with the following:
@@ -109,4 +119,3 @@ Nx comes with local caching already built-in (check your `nx.json`). On CI you m
 - [Set up remote caching](https://nx.dev/core-features/share-your-cache)
 - [Set up task distribution across multiple machines](https://nx.dev/core-features/distribute-task-execution)
 - [Learn more how to setup CI](https://nx.dev/recipes/ci)
-
