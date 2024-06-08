@@ -1,0 +1,22 @@
+{
+  "name": "@workspace/tailwind",
+  "type": "module",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup src/index.ts --config tsup.config.ts",
+    "build:cli": "tsup src/index.ts --format cjs,esm --dts",
+    "lint": "eslint src --ext .ts",
+    "check": "tsc --noEmit",
+    "test": "vitest"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}
