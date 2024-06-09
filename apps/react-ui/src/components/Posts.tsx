@@ -34,7 +34,7 @@ export function Posts(): JSX.Element {
     return <div>No posts found</div>
   }
 
-  const posts = data.pages.flatMap((page) => (page.status === 200 ? page.body.posts : []))
+  const posts = data.pages.flatMap((page) => (page.status === 200 ? page.body.items : []))
 
   return (
     <div>
@@ -42,26 +42,24 @@ export function Posts(): JSX.Element {
         {posts.map(
           (post): JSX.Element => (
             <Link to={`/posts/${post.id}`} key={post.id}>
-              <div className="w-full cursor-pointer border border-slate-200 bg-slate-100 p-4 shadow-lg transition hover:scale-105">
-                <div className="card-body">
-                  <div className="flex flex-row justify-between">
-                    <h2 className="mb-4 text-xl font-medium tracking-tighter">{post.title}</h2>
-                    <div>
-                      <div className="avatar placeholder">
-                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-200">
-                          <span className="text-xs">AZ</span>
-                        </div>
+              <div className="flex w-full cursor-pointer flex-col gap-4 border border-slate-200 bg-slate-100 p-4 shadow-lg transition hover:scale-105">
+                <div className="flex flex-row justify-between">
+                  <h2 className="text-xl font-medium tracking-tighter">{post.title}</h2>
+                  <div>
+                    <div className="avatar placeholder">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-200">
+                        <span className="text-xs">AZ</span>
                       </div>
                     </div>
                   </div>
-                  <p>{post.description}?</p>
-                  <div className="flex justify-end gap-2 text-xs">
-                    {post.tags.map((tag) => (
-                      <div key={tag} className="rounded-lg bg-slate-200 p-2">
-                        Fashion
-                      </div>
-                    ))}
-                  </div>
+                </div>
+                <p>{post.description}?</p>
+                <div className="flex flex-wrap justify-end gap-2 text-xs">
+                  {post.tags.map((tag) => (
+                    <div key={tag} className="rounded-lg bg-slate-200 p-2">
+                      {tag}
+                    </div>
+                  ))}
                 </div>
               </div>
             </Link>

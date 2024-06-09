@@ -1,4 +1,5 @@
 import { apiQuery } from '../api/query-client'
+import { Spinner } from '@workspace/react-ui'
 
 export interface PostProps {
   postId: string
@@ -44,7 +45,7 @@ export function Post({ postId }: PostProps): JSX.Element {
       <div className="prose flex h-full w-full flex-row items-center justify-center">
         <div>
           <h1>Loading...</h1>
-          <progress className="progress w-56"></progress>
+          <Spinner />
         </div>
       </div>
     )

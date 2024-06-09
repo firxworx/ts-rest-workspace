@@ -9,8 +9,11 @@ import { API_URL } from '../constants'
 export const apiQuery = initQueryClient(apiBlog, {
   baseUrl: API_URL,
 
-  // example of adding a header to every request
+  // example of adding a header to every request (also refer to the contract that requires this header)
   baseHeaders: {
     'x-api-key': 'key',
   },
+
+  // include credentials
+  //  credentials: 'same-origin',
 })

@@ -1,8 +1,10 @@
-export default {
+const postcssConfig = {
   plugins: {
-    tailwindcss: {}, // { config: path.join(import.meta.dirname, 'tailwind.config.ts'), }
+    tailwindcss: {},
     '@csstools/postcss-oklab-function': { preserve: true },
     'postcss-discard-comments': {},
     autoprefixer: {},
   },
 }
+
+export default postcssConfig
