@@ -1,6 +1,6 @@
 # @workspace/data
 
-ts-rest data schemas and zod schemas.
+Zod schemas, types, interfaces, and related utilities that define and validate the data used across the project.
 
 ## Test
 

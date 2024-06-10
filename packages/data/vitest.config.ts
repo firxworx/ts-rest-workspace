@@ -14,7 +14,7 @@ export default mergeConfig(
     test: {
       environment: 'jsdom',
 
-      // reporters is not supported in a project-level config so it will show an error
+      // reporters are not supported in a project-level config so it will show an error
       // reporters: ['json'],
     },
     // includeSource: ['src/**/*.ts'],
