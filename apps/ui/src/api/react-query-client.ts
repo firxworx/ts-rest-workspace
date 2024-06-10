@@ -5,6 +5,7 @@ export const queryClient = new QueryClient({
     queries: {
       refetchOnReconnect: true,
       refetchOnWindowFocus: true,
+      networkMode: 'offlineFirst',
       staleTime: 1000 * 60 * 5, // 5 minutes (note: `Infinity` is 'never stale')
       // retry: 0,
       retry: (failureCount, error) => {
@@ -38,7 +39,7 @@ export const queryClient = new QueryClient({
           // }
         }
 
-        return failureCount < 3
+        return failureCount < 2
       },
 
       retryDelay: (attemptIndex) => {
