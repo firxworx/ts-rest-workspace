@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss'
-import projectPreset from '../preset'
+import projectPreset from '../../preset'
 
 const tailwindConfig: Config = {
   // dark mode is controlled via a '.dark' class attribute

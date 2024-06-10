@@ -13,14 +13,18 @@
   },
   "exports": {
     ".": "./src/index.ts",
-    "./config": "./src/config/index.ts",
+    "./configs/tailwind": "./src/configs/tailwind/index.ts",
+    "./configs/postcss": "./src/configs/postcss/index.ts",
     "./preset": "./src/preset/index.ts"
   },
   "devDependencies": {
+    "@csstools/postcss-oklab-function": "^3.0.16",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.13",
+    "autoprefixer": "^10.4.19",
     "clsx": "^2.1.1",
+    "postcss-discard-comments": "^7.0.0",
     "tailwindcss": "3.4.4",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.4.5"
