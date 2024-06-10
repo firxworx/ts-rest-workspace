@@ -4,10 +4,20 @@ import { app } from './app/app.js'
 const HOST = process.env.HOST ?? 'localhost'
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3939
 
-const fastify: FastifyInstance = Fastify({ logger: true })
+// https://fastify.dev/docs/latest/Reference/Server/
+const fastify: FastifyInstance = Fastify({ logger: true, disableRequestLogging: false })
 
-// ts-rest routes are autoloaded from routes/ via fastify AutoLoad (refer to app.ts)
 await fastify.register(app)
+
+fastify.addHook('onClose', (_instance, done) => {
+  process.removeListener('SIGTERM', handleSignal)
+  process.removeListener('SIGINT', handleSignal)
+  process.removeListener('SIGUSR2', handleSignal)
+  process.removeListener('uncaughtException', handleError)
+  process.removeListener('unhandledRejection', handleError)
+
+  done()
+})
 
 const start = async (): Promise<void> => {
   try {
@@ -18,11 +28,43 @@ const start = async (): Promise<void> => {
   }
 }
 
+const cleanup = async (): Promise<void> => {
+  // add any cleanup code here to cleanup and close as required...
+  // await Promise.allSettled([cleanupTask(), cleanupTask2(), ...])
+
+  await new Promise((resolve) => setTimeout(resolve, 10))
+}
+
+const exit = async (): Promise<void> => {
+  try {
+    await fastify.close()
+    process.exit(0)
+  } catch (error: unknown) {
+    fastify.log.error('Error shutting down server')
+    fastify.log.error(error)
+    process.exit(1)
+  }
+}
+
+const handleSignal = async (signal: string): Promise<void> => {
+  fastify.log.warn(`Received signal ${signal}: attempting graceful shutdown...`)
+
+  await cleanup()
+  await exit()
+}
+
+const handleError = async (): Promise<void> => {
+  fastify.log.warn(`Uncaught exception or promise rejection... attempting graceful shutdown...`)
+
+  await cleanup()
+  await exit()
+}
+
+process.once('uncaughtException', handleError)
+process.once('unhandledRejection', handleError)
+
+process.once('SIGINT', handleSignal) // control+C
+process.once('SIGTERM', handleSignal) // exit from lambda/heroku/etc
+process.once('SIGUSR2', handleSignal) // nodemon-like utility
+
 await start()
-
-// see closeWithGrace example here https://github.com/jellydn/nft-app/blob/main/server/src/server.ts
-// https://github.com/jellydn/nft-app/blob/main/server/src/plugins/cors.ts
-// multipart https://github.com/jellydn/nft-app/blob/main/server/src/plugins/multipart.ts
-
-// neat https://github.com/fastify/aws-lambda-fastify/blob/master/README.md
-// + https://github.com/fastify/aws-lambda-fastify/issues/89 re lower cold start latency (see readme on it)

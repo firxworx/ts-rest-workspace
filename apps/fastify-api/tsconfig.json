@@ -1,43 +1,23 @@
 {
   // @see https://www.npmjs.com/package/fastify-tsconfig
-  // the package sets module and moduleResolution to NodeNext
-  // "extends": ["../../tsconfig.base.json", "fastify-tsconfig"],
+  // the fastify-tsconfig package sets `module` and `moduleResolution` to NodeNext
+  // e.g. "extends": ["../../tsconfig.base.json", "fastify-tsconfig"],
+  //
   "extends": ["../../tsconfig.base.json"],
   "compilerOptions": {
     "strict": true,
-
     "outDir": "dist",
-
-    // path aliases
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"]
-    },
-
-    // build configuration
     "target": "ES2022",
-    "lib": ["ES2022"], // ["DOM", "DOM.Iterable"],
+    "lib": ["ES2022", "ES2022.Intl"],
 
-    // recommended by fastify-tsconfig
+    // fastify-tsconfig recommends "NodeNext" (we use esbuild config for builds -- see `build.ts`)
     // "module": "NodeNext",
     // "moduleResolution": "NodeNext",
 
-    // include sourcemaps
     "sourceMap": true,
-
-    // workspace root defaults
-    // "module": "ESNext",
-    // "moduleResolution": "Bundler",
-
     "resolveJsonModule": true,
     "isolatedModules": true,
-    // "allowImportingTsExtensions": true,
-    // "noEmit": true,
-
-    //
-    //     "moduleResolution": "Node", // "Node" | "Classic, must be nodenext or unspecified with module nodenext
-
-    // typescript
+    "skipLibCheck": true,
     "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -45,35 +25,19 @@
     "noEmit": true,
     "incremental": true,
     "jsx": "preserve",
-
-    // remove comments for smaller build
     "removeComments": true,
-
-    // generate types and their sourcemaps
     "declaration": true,
-    "declarationMap": true, // recommended for monorepos by fastify-tsconfig
-
-    // linting
+    "declarationMap": true,
     "strictFunctionTypes": true,
+    "forceConsistentCasingInFileNames": true,
 
     // better compatibility with shared front-end/back-end contracts and ability to use Partial<T>
     "exactOptionalPropertyTypes": false
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["**/*.{spec,test}.ts"],
+  "include": ["../../reset.d.ts", "src/**/*.ts"],
   "ts-node": {
     "compilerOptions": {
       "esModuleInterop": true
     }
   }
-  // "references": [
-  //   {
-  //     "path": "./tsconfig.app.json"
-  //   },
-  //   {
-  //     "path": "./tsconfig.spec.json"
-  //   }
-  // ],
-  // "files": [],
-  // "include": []
 }
