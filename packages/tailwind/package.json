@@ -7,16 +7,28 @@
   "types": "src/index.ts",
   "sideEffects": false,
   "scripts": {
-    "build": "tsup src/index.ts --config tsup.config.ts",
-    "build:cli": "tsup src/index.ts --format cjs,esm --dts",
     "lint": "eslint src --ext .ts",
     "check": "tsc --noEmit",
     "test": "vitest"
   },
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./config": "./src/config/index.ts",
+    "./preset": "./src/preset/index.ts"
   },
   "devDependencies": {
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.13",
+    "clsx": "^2.1.1",
+    "tailwindcss": "3.4.4",
+    "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.4.5"
+  },
+  "peerDependencies": {
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.13",
+    "tailwindcss-animate": "^1.0.7"
   }
 }

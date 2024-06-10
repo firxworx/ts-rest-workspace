@@ -27,7 +27,8 @@
     "declarationMap": true,
 
     // linting
-    "strictFunctionTypes": true
+    "strictFunctionTypes": true,
+    "exactOptionalPropertyTypes": false
 
     // "types": ["node", "vitest/globals"]
   },
