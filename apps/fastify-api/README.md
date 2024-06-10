@@ -22,6 +22,16 @@ To run only the API server:
 pnpm --filter fastify-api dev
 ```
 
+## Test
+
+An example test is included in the `test/` directory that tests the '/' route which has a canned example response.
+
+To run this project's tests:
+
+```sh
+pnpm --filter fastify-api test
+```
+
 ## Build
 
 The `build` target in `package.json` runs `esbuild` using the config `build.ts` to bundle the server code.
