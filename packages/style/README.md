@@ -2,9 +2,9 @@
 
 This internal package is home to tools and utilities relevant to styling and theming front-end UI's in the project.
 
-## Features
+The primary feature of this package is to export the famed `cn()` helper function.
 
-The primary feature of this package is the famed `cn()` helper function.
+## Features
 
 `cn()` intelligently merges tailwindcss utility classes by combining the functionality of `tailwind-merge` and `clsx`. It enables powerful customizable component patterns with overridable styles.
 

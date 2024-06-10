@@ -10,6 +10,9 @@ import tailwindCssAnimatePlugin from 'tailwindcss-animate'
 import { projectColors, shadCnColors } from './theme-extends/colors'
 import { getShadcnCssCustomProperties } from './css-properties/shadcn'
 import { HTML_BASE_FONT_SIZE_PX, PALETTE_CSS_VARIABLE_PREFIX } from '../constants'
+import { themeHeadingComponents } from './theme-layers/components/headings'
+import { themeListComponents } from './theme-layers/components/lists'
+import { presetAnimations } from './theme-extends/animation'
 
 export const projectPreset: Partial<OptionalConfig> = {
   darkMode: 'class',
@@ -32,8 +35,16 @@ export const projectPreset: Partial<OptionalConfig> = {
     },
   },
   extend: {
+    animation: presetAnimations.animation,
+    keyframes: presetAnimations.keyframes,
+
     colors: {
       ...shadCnColors,
+      destructive: {
+        DEFAULT: 'hsl(var(--destructive))',
+        foreground: 'hsl(var(--destructive-foreground))',
+      },
+
       [PALETTE_CSS_VARIABLE_PREFIX]: {
         ...projectColors,
       },
@@ -49,7 +60,7 @@ export const projectPreset: Partial<OptionalConfig> = {
     tailwindCssAnimatePlugin,
 
     // inline plugin definition to specify css custom properties + custom tailwind classes
-    plugin(function ({ addBase, addComponents, addUtilities, theme }) {
+    plugin(function ({ addBase, addComponents, theme }) {
       const shadcnCssCustomProperties = getShadcnCssCustomProperties(theme)
 
       addBase({
@@ -60,6 +71,10 @@ export const projectPreset: Partial<OptionalConfig> = {
         '.dark': {
           'color-scheme': 'dark',
           ...shadcnCssCustomProperties['.dark'],
+        },
+
+        '*': {
+          // '@apply border-border': {},
         },
 
         /**
@@ -76,13 +91,14 @@ export const projectPreset: Partial<OptionalConfig> = {
 
         html: {
           '@apply antialiased': {},
-          'font-feature-settings': '"rlig" 1, "calt" 1',
           fontSize: `${HTML_BASE_FONT_SIZE_PX}px`,
           scrollBehavior: 'smooth',
         },
 
         body: {
           '@apply font-sans': {},
+          // '@apply bg-background text-foreground': {},
+          'font-feature-settings': '"rlig" 1, "calt" 1',
         },
       })
 
@@ -91,9 +107,7 @@ export const projectPreset: Partial<OptionalConfig> = {
        *
        * They can be applied using the `@apply` directive in the same way as other tailwind classes.
        */
-      addUtilities({
-        // ...
-      })
+      // addUtilities({...})
 
       /**
        * Custom classes registered as tailwindcss components can have their `class` utilities
@@ -106,9 +120,10 @@ export const projectPreset: Partial<OptionalConfig> = {
         '.cx-disabled': {
           '@apply disabled:pointer-events-none disabled:cursor-default disabled:opacity-50': {},
         },
+
+        ...themeHeadingComponents,
+        ...themeListComponents,
       })
     }),
   ],
 } satisfies Partial<OptionalConfig>
-
-export default projectPreset

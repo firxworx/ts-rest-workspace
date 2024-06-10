@@ -5,7 +5,8 @@ export interface ContractErrorResponse extends z.infer<typeof zContractErrorResp
 
 export const zContractMessageResponse = z.object({ message: z.string() })
 export const zContractErrorResponse = z.object({
-  code: z.number().optional(),
-  error: z.string(),
+  code: z.string().optional(),
+  status: z.number(),
+  message: z.string(),
   errors: z.array(z.object({ field: z.string(), message: z.string() })).optional(),
 })

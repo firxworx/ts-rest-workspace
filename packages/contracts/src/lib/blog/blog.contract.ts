@@ -6,8 +6,8 @@ import {
   zContractMessageResponse,
   zGetManyQueryParams,
   zPost,
-  zPostCreateRequest,
-  zPostUpdateRequest,
+  zPostCreateDto,
+  zPostUpdateDto,
 } from '@workspace/data'
 
 const c = initContract()
@@ -21,7 +21,7 @@ export const apiBlog = c.router(
         201: zPost,
         400: zContractErrorResponse,
       },
-      body: zPostCreateRequest,
+      body: zPostCreateDto,
       summary: 'Create a post',
       metadata: { roles: ['user'] } as const,
     },
@@ -29,7 +29,7 @@ export const apiBlog = c.router(
       method: 'PATCH',
       path: `/posts/:id`,
       responses: { 200: zPost, 400: zContractErrorResponse, 404: zContractErrorResponse, 500: zContractErrorResponse },
-      body: zPostUpdateRequest,
+      body: zPostUpdateDto,
       summary: 'Update a post',
       metadata: {
         roles: ['user'],
@@ -76,6 +76,8 @@ export const apiBlog = c.router(
       }),
       metadata: { roles: ['guest', 'user'] } as const,
     },
+
+    // this endpoint helps demonstrate query/path params
     testPathParams: {
       method: 'GET',
       path: '/test/:id/:name',
@@ -106,6 +108,5 @@ export const apiBlog = c.router(
     baseHeaders: z.object({
       'x-api-key': z.string(),
     }),
-    // pathPrefix: '/api/v1', // no effect and no type issue either?
   },
 )

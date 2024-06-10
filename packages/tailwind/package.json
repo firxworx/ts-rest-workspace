@@ -7,15 +7,9 @@
   "types": "src/index.ts",
   "sideEffects": false,
   "scripts": {
-    "lint": "eslint src --ext .ts",
+    "lint": "eslint . --config ../../eslint.config.js",
     "check": "tsc --noEmit",
     "test": "vitest"
-  },
-  "exports": {
-    ".": "./src/index.ts",
-    "./configs/tailwind": "./src/configs/tailwind/index.ts",
-    "./configs/postcss": "./src/configs/postcss/index.ts",
-    "./preset": "./src/preset/index.ts"
   },
   "devDependencies": {
     "@csstools/postcss-oklab-function": "^3.0.16",

@@ -30,9 +30,5 @@
 
     // relax exact optional property types for friendlier type definitions for front-end patterns
     "exactOptionalPropertyTypes": false
-
-    // "types": ["node", "vitest/globals"]
   }
-  // "files": [],
-  // "include": []
 }

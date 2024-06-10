@@ -1,5 +1,4 @@
 import { defineConfig } from 'tsup'
-// import { } // consider importing from a base in workspace root...
 
 export default defineConfig({
   target: 'es2022',

@@ -1,37 +1,26 @@
 # @workspace/tailwind
 
-Shared configs and the project's [tailwind preset](https://tailwindcss.com/docs/presets).
+Shared [tailwind preset](https://tailwindcss.com/docs/presets) for apps to use in their tailwind configuration.
 
-- `src/configs/tailwind/index.ts` - shared tailwind configuration
-- `src/configs/postcss/index.ts` - shared postcss config to use with tailwind
-- `src/preset/index.ts` - shared tailwind preset included by the tailwind configuration with theme definition
+This project centralizes customizations to the tailwind theme, defines global styles and custom CSS properties, adds required plugins, and overal defines how tailwind should work in this workspace.
 
-This project centralizes theme customizations and tailwind behaviour.
+Refer to `src/preset/index.ts`.
 
 ## Installation
 
-This package should be added as a dev dependency of consuming projects using the `workspace:*` protocol:
+Consuming apps in the workspace should add this package as dev dependency:
 
 ```sh
 pnpm --filter my-target-project add -D @workspace/tailwind@workspace:*
 ```
 
-For portability you may want to mirror this package's `devDependencies` in the `package.json` of your consuming project.
+You may want to mirror this package's `devDependencies` in the `package.json` of your consuming project for a portable package that's ready to build or deploy anywhere. 
 
 ## Usage
 
 ```ts
-// in tailwind.config.ts
-import projectConfig from '@workspace/tailwind/configs/tailwind'
-
-// in postcss.config.ts
-import postcssConfig from '@workspace/tailwind/configs/postcss'
-
-// in another preset or a new config file (this preset is already included by @workspace/tailwind/config)
-import projectPreset from '@workspace/tailwind/preset'
+import { projectPreset } from '@workspace/tailwind'
 ```
-
-Note the postcss config might have issues with CJS/ESM due to upstream dependency issues. It may be best to copy the contents to a project's `postcss.config.js` file for the time being. 
 
 ## Custom CSS Classes
 
