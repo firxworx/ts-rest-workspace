@@ -1,25 +1,14 @@
 import { initContract } from '@ts-rest/core'
 import { z } from 'zod'
-
-// example from the ts-rest repo
-
-export interface Post {
-  id: string
-  title: string
-  description: string | null
-  content: string | null
-  published: boolean
-  tags: string[]
-}
-
-const PostSchema = z.object({
-  id: z.string(),
-  title: z.string(),
-  description: z.string().nullable(),
-  content: z.string().nullable(),
-  published: z.boolean(),
-  tags: z.array(z.string()),
-})
+import {
+  createPaginatedResponseSchema,
+  zContractErrorResponse,
+  zContractMessageResponse,
+  zGetManyQueryParams,
+  zPost,
+  zPostCreateRequest,
+  zPostUpdateRequest,
+} from '@workspace/data'
 
 const c = initContract()
 
@@ -29,28 +18,18 @@ export const apiBlog = c.router(
       method: 'POST',
       path: '/posts',
       responses: {
-        201: PostSchema,
-        400: z.object({ message: z.string() }),
+        201: zPost,
+        400: zContractErrorResponse,
       },
-      body: z.object({
-        title: z.string().transform((v) => v.trim()),
-        content: z.string(),
-        published: z.boolean().optional(),
-        description: z.string().optional(),
-      }),
+      body: zPostCreateRequest,
       summary: 'Create a post',
       metadata: { roles: ['user'] } as const,
     },
     updatePost: {
       method: 'PATCH',
       path: `/posts/:id`,
-      responses: { 200: PostSchema },
-      body: z.object({
-        title: z.string().optional(),
-        content: z.string().optional(),
-        published: z.boolean().optional(),
-        description: z.string().optional(),
-      }),
+      responses: { 200: zPost, 400: zContractErrorResponse, 404: zContractErrorResponse, 500: zContractErrorResponse },
+      body: zPostUpdateRequest,
       summary: 'Update a post',
       metadata: {
         roles: ['user'],
@@ -62,10 +41,10 @@ export const apiBlog = c.router(
       method: 'DELETE',
       path: `/posts/:id`,
       responses: {
-        200: z.object({ message: z.string() }),
-        404: z.object({ message: z.string() }),
+        200: zContractMessageResponse,
+        404: zContractErrorResponse,
       },
-      body: null,
+      body: z.object({}), // @workaround for https://github.com/ts-rest/ts-rest/issues/383,
       summary: 'Delete a post',
       metadata: {
         roles: ['user'],
@@ -77,7 +56,7 @@ export const apiBlog = c.router(
       method: 'GET',
       path: `/posts/:id`,
       responses: {
-        200: PostSchema,
+        200: zPost,
         404: z.null(),
       },
       query: null,
@@ -88,18 +67,9 @@ export const apiBlog = c.router(
       method: 'GET',
       path: '/posts',
       responses: {
-        200: z.object({
-          posts: PostSchema.array(),
-          count: z.number(),
-          skip: z.number(),
-          take: z.number(),
-        }),
+        200: createPaginatedResponseSchema(zPost),
       },
-      query: z.object({
-        take: z.string().transform(Number),
-        skip: z.string().transform(Number),
-        search: z.string().optional(),
-      }),
+      query: zGetManyQueryParams,
       summary: 'Get all posts',
       headers: z.object({
         'x-pagination': z.coerce.number().optional(),

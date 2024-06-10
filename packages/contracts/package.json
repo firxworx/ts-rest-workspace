@@ -18,7 +18,7 @@
     "zod": "^3.23.8"
   },
   "peerDependencies": {
-    "@ts-rest/core": "^3.28.0",
+    "@ts-rest/core": "^3.45.2",
     "@workspace/common": "workspace:*",
     "@workspace/data": "workspace:*",
     "zod": "^3.23.8"
