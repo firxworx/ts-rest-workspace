@@ -5,21 +5,23 @@ import { Spinner } from '../src/components/Spinner'
 
 // pnpm --filter @workspace/react-ui test test/spinner.test.ts
 describe('Spinner', () => {
-  it('renders without crashing', () => {
+  it('renders spinner with default loading text', () => {
     render(<Spinner />)
-    const spinnerElement = screen.getByTestId('spinner')
+
+    const spinnerElement = screen.getByText(/loading/i)
     expect(spinnerElement).toBeInTheDocument()
   })
 
-  it('has the correct class for styling', () => {
-    render(<Spinner />)
-    const spinnerElement = screen.getByTestId('spinner')
-    expect(spinnerElement).toHaveClass('spinner-class') // Replace with your actual class name
+  it('renders spinner with custom loading text via prop', () => {
+    render(<Spinner label="Downloading files" />)
+
+    const spinnerElement = screen.getByText(/Downloading files/i)
+    expect(spinnerElement).toBeInTheDocument()
   })
 
-  it('is visible on the screen', () => {
+  it('renders a visible component to the screen', () => {
     render(<Spinner />)
-    const spinnerElement = screen.getByTestId('spinner')
+    const spinnerElement = screen.getByText(/loading/i)
     expect(spinnerElement).toBeVisible()
   })
 })
