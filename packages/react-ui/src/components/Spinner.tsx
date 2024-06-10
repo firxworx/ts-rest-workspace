@@ -1,20 +1,21 @@
+import { cn } from '@workspace/style'
 import React from 'react'
 
 export interface SpinnerProps {
   /** aria-label to set (default: 'Loading…') */
   label?: string | undefined | null
+  className?: string
 }
 
-export function Spinner({ label = 'Loading…' }: SpinnerProps): JSX.Element {
+export function Spinner({ label = 'Loading…', className }: SpinnerProps): JSX.Element {
   return (
-    <div role={label ? 'alert' : undefined} aria-live={label ? 'polite' : undefined}>
-      <svg
-        className="size-6 animate-spin text-blue-600"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
+    <div
+      role={label ? 'alert' : undefined}
+      aria-live={label ? 'polite' : undefined}
+      className={cn('text-blue-600', className)}
+    >
+      <svg className="size-6 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
         <path
           className="opacity-75"
           fill="currentColor"
