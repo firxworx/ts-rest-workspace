@@ -1,5 +1,6 @@
 import type { TailwindColorsConfig } from '@/types/tailwind.types'
-import colors from 'tailwindcss/colors'
+
+/* playground color palette */
 
 /**
  * Extended palette colors to be imported by the tailwind preset.
@@ -61,15 +62,5 @@ export const shadCnColors: TailwindColorsConfig = {
   card: {
     DEFAULT: 'hsl(var(--card))',
     foreground: 'hsl(var(--card-foreground))',
-  },
-}
-
-/**
- * Extended palette colors to be imported by the tailwind preset
- * under the `theme.extend.colors.P` namespace.
- */
-export const projectColors: TailwindColorsConfig = {
-  brand: {
-    DEFAULT: colors.sky[600],
   },
 }

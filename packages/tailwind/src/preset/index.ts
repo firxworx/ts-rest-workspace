@@ -7,17 +7,21 @@ import formsPlugin from '@tailwindcss/forms'
 import containerQueriesPlugin from '@tailwindcss/container-queries'
 import tailwindCssAnimatePlugin from 'tailwindcss-animate'
 
-import { projectColors, shadCnColors } from './theme-extends/colors'
-import { getShadcnCssCustomProperties } from './css-properties/shadcn'
 import { HTML_BASE_FONT_SIZE_PX, PALETTE_CSS_VARIABLE_PREFIX } from '../constants'
+
+import { projectColors } from './theme-extends/colors-project'
+import { shadCnColors } from './theme-extends/colors-shadcn'
+import { presetAnimations } from './theme-extends/animation'
+
+import { getShadcnCssCustomProperties } from './css-properties/shadcn'
+
 import { themeHeadingComponents } from './theme-layers/components/headings'
 import { themeListComponents } from './theme-layers/components/lists'
-import { presetAnimations } from './theme-extends/animation'
 
 export const projectPreset: Partial<OptionalConfig> = {
   darkMode: 'class',
   theme: {
-    // container per shadcn (https://ui.shadcn.com/docs/installation)
+    // container per shadcn/ui preferences https://ui.shadcn.com/docs/installation
     container: {
       center: true,
       padding: '2rem',
@@ -30,24 +34,32 @@ export const projectPreset: Partial<OptionalConfig> = {
       xxs: '400px',
       xs: '475px',
       ...defaultTheme.screens,
-      '2xl': '1400px', // tailwind's default: 1280px
-      // '3xl': '1600px', // tailwind's default: 1536px
+      '2xl': '1400px', // tailwind's 2xl default: 1280px
+      '3xl': '1600px', // tailwind's 3xl default: 1536px
     },
-  },
-  extend: {
-    animation: presetAnimations.animation,
-    keyframes: presetAnimations.keyframes,
+    extend: {
+      colors: {
+        // shadcn/ui default palette colors
+        ...shadCnColors,
 
-    colors: {
-      ...shadCnColors,
-      destructive: {
-        DEFAULT: 'hsl(var(--destructive))',
-        foreground: 'hsl(var(--destructive-foreground))',
+        // workspace convention for custom palette colors is to use a namespace prefix e.g. `bg-P-brand`
+        [PALETTE_CSS_VARIABLE_PREFIX]: {
+          ...projectColors,
+        },
       },
 
-      [PALETTE_CSS_VARIABLE_PREFIX]: {
-        ...projectColors,
+      borderRadius: {
+        lg: `var(--radius)`,
+        md: `calc(var(--radius) - 2px)`,
+        sm: 'calc(var(--radius) - 4px)',
       },
+
+      fontFamily: {
+        sans: ['Inter\\ Variable', 'InterFallback', ...defaultTheme.fontFamily.sans],
+      },
+
+      animation: presetAnimations.animation,
+      keyframes: presetAnimations.keyframes,
     },
   },
   plugins: [
@@ -67,14 +79,16 @@ export const projectPreset: Partial<OptionalConfig> = {
         ':root': {
           'color-scheme': 'light',
           ...shadcnCssCustomProperties[':root'],
+
+          // oklch example
+          '--P-ring': '79.15% 0.074 232.27',
         },
         '.dark': {
           'color-scheme': 'dark',
           ...shadcnCssCustomProperties['.dark'],
-        },
 
-        '*': {
-          // '@apply border-border': {},
+          // oklch example
+          '--P-ring': '42.45% 0.077 237.07',
         },
 
         /**
@@ -89,6 +103,10 @@ export const projectPreset: Partial<OptionalConfig> = {
           },
         },
 
+        '*': {
+          '@apply border-border': {},
+        },
+
         html: {
           '@apply antialiased': {},
           fontSize: `${HTML_BASE_FONT_SIZE_PX}px`,
@@ -96,9 +114,17 @@ export const projectPreset: Partial<OptionalConfig> = {
         },
 
         body: {
-          '@apply font-sans': {},
-          // '@apply bg-background text-foreground': {},
+          '@apply bg-background text-foreground': {},
           'font-feature-settings': '"rlig" 1, "calt" 1',
+
+          // a default line-height (leading-normal) is required to enable fallback fonts to work and avoid CLS
+          '@apply font-sans leading-normal': {},
+
+          // fix inter variable's "over italicized" issue (it is controlled by `oblique` in the variable font)
+          // https://variablefonts.io/about-variable-fonts/
+          em: {
+            fontStyle: 'oblique 10deg',
+          },
         },
       })
 
@@ -127,3 +153,5 @@ export const projectPreset: Partial<OptionalConfig> = {
     }),
   ],
 } satisfies Partial<OptionalConfig>
+
+export default projectPreset

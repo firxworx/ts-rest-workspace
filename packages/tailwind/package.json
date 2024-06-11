@@ -11,6 +11,18 @@
     "check": "tsc --noEmit",
     "test": "vitest"
   },
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "require": "./src/index.ts",
+      "types": "./src/index.ts"
+    },
+    "./preset": {
+      "import": "./src/preset/index.ts",
+      "require": "./src/preset/index.ts",
+      "types": "./src/preset/index.ts"
+    }
+  },
   "devDependencies": {
     "@csstools/postcss-oklab-function": "^3.0.16",
     "@tailwindcss/container-queries": "^0.1.1",
