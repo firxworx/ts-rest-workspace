@@ -1,4 +1,4 @@
-import { initContract } from '@ts-rest/core'
+import { initContract, type RouterOptions } from '@ts-rest/core'
 import { z } from 'zod'
 import {
   createPaginatedResponseSchema,
@@ -6,30 +6,43 @@ import {
   zContractMessageResponse,
   zGetManyQueryParams,
   zPost,
-  zPostCreateDto,
-  zPostUpdateDto,
+  zPostCreateRequestDto,
+  zPostUpdateRequestDto,
+  zUuidParams,
 } from '@workspace/data'
+import { BLOG_CONTRACT_PATH_PREFIX } from '../constants'
 
 const c = initContract()
 
-export const apiBlog = c.router(
+const routerOptions: RouterOptions<typeof BLOG_CONTRACT_PATH_PREFIX> = {
+  pathPrefix: BLOG_CONTRACT_PATH_PREFIX,
+  strictStatusCodes: true,
+
+  // example of requiring certain headers for every request
+  baseHeaders: z.object({
+    'x-api-key': z.string(),
+  }),
+}
+
+export const apiBlogContract = c.router(
   {
     createPost: {
       method: 'POST',
-      path: '/posts',
+      path: '/',
       responses: {
         201: zPost,
         400: zContractErrorResponse,
       },
-      body: zPostCreateDto,
+      body: zPostCreateRequestDto,
       summary: 'Create a post',
       metadata: { roles: ['user'] } as const,
     },
     updatePost: {
       method: 'PATCH',
-      path: `/posts/:id`,
+      path: `/:id`,
       responses: { 200: zPost, 400: zContractErrorResponse, 404: zContractErrorResponse, 500: zContractErrorResponse },
-      body: zPostUpdateDto,
+      pathParams: zUuidParams,
+      body: zPostUpdateRequestDto,
       summary: 'Update a post',
       metadata: {
         roles: ['user'],
@@ -39,7 +52,8 @@ export const apiBlog = c.router(
     },
     deletePost: {
       method: 'DELETE',
-      path: `/posts/:id`,
+      path: `/:id`,
+      pathParams: zUuidParams,
       responses: {
         200: zContractMessageResponse,
         404: zContractErrorResponse,
@@ -54,18 +68,19 @@ export const apiBlog = c.router(
     },
     getPost: {
       method: 'GET',
-      path: `/posts/:id`,
+      path: `/:id`,
+      pathParams: zUuidParams,
       responses: {
         200: zPost,
         404: z.null(),
       },
       query: null,
       summary: 'Get a post by id',
-      metadata: { roles: ['guest', 'user'] } as const,
+      metadata: { roles: ['guest', 'user'] } as const, // example only
     },
     getPosts: {
       method: 'GET',
-      path: '/posts',
+      path: '/',
       responses: {
         200: createPaginatedResponseSchema(zPost),
       },
@@ -74,39 +89,8 @@ export const apiBlog = c.router(
       headers: z.object({
         'x-pagination': z.coerce.number().optional(),
       }),
-      metadata: { roles: ['guest', 'user'] } as const,
-    },
-
-    // this endpoint helps demonstrate query/path params
-    testPathParams: {
-      method: 'GET',
-      path: '/test/:id/:name',
-      pathParams: z.object({
-        id: z
-          .string()
-          .transform(Number)
-          .refine((v) => Number.isInteger(v), {
-            message: 'Must be an integer',
-          }),
-      }),
-      query: z.object({
-        field: z.string().optional(),
-      }),
-      responses: {
-        200: z.object({
-          id: z.number().lt(1000),
-          name: z.string(),
-          defaultValue: z.string().default('hello world'),
-        }),
-      },
-      metadata: { roles: ['guest', 'user'] } as const,
+      metadata: { roles: ['guest', 'user'] } as const, // example only
     },
   },
-  {
-    pathPrefix: '/api/v1',
-    strictStatusCodes: true,
-    baseHeaders: z.object({
-      'x-api-key': z.string(),
-    }),
-  },
+  routerOptions,
 )
