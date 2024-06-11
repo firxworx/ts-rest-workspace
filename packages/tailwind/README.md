@@ -4,7 +4,7 @@ This package is home to the shared [tailwind preset](https://tailwindcss.com/doc
 
 This project centralizes customizations to the tailwind theme, defines global styles and custom CSS properties, adds required plugins, and overal defines how tailwind should work in this workspace.
 
-The preset also effectively installs shadcn/ui using its default palette and configuration: 
+The preset also effectively installs shadcn/ui using its default palette and configuration:
 https://ui.shadcn.com/docs/installation/manual
 
 Refer to `src/preset/index.ts`.

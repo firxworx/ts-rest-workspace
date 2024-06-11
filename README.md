@@ -37,7 +37,7 @@ Unlike so many "starters" the setup is fast and `pnpm dev` + `pnpm test` + `pnpm
 - `apps/ui` - React + Vite SPA using ts-rest's react-query client to call the API
 - `apps/fastify-api` - Fastify API server using ts-rest to implement the back-end of the contract
 
-🍬 Assorted goodies include 
+🍬 Assorted goodies include
 
 - fastify api build with `esbuild` with the dev server running using `tsx watch` for fast iteration
 - working `vitest` configuration in all packages including `@testing-library/react` for testing React components
@@ -108,7 +108,7 @@ Refer to the `README.md` files of each app for important information about the b
 
 In pnpm workspaces use the `-r` (recursive) option to run any command against all packages in the workspace. Any project with the target command in its `package.json` will run it. Add the `--stream` option to interleave the output of all the commands.
 
-For example to run type-check: 
+For example to run type-check:
 
 ```sh
 pnpm -r check
@@ -156,7 +156,7 @@ The mock blog in this repo is a fully functional CRUD example. It is kept simple
 
 The API is practically a blank slate for you to add your favourite database tooling to persist data.
 
-Fastify supports almost everything the Node ecosystem offers including [Drizzle](https://orm.drizzle.team/), [Slonik](https://github.com/gajus/slonik), [Prisma](https://www.prisma.io/), [TypeORM](https://typeorm.io/), [Mongoose](https://mongoosejs.com/docs/), and more. 
+Fastify supports almost everything the Node ecosystem offers including [Drizzle](https://orm.drizzle.team/), [Slonik](https://github.com/gajus/slonik), [Prisma](https://www.prisma.io/), [TypeORM](https://typeorm.io/), [Mongoose](https://mongoosejs.com/docs/), and more.
 
 The Fastify app is a blank slate so it doesn't include any plugins or middleware that might not work in your project. For example it does not include `@fastify/cors` or `@fastify/helmet` in case you intend to deploy to a platform that already provides these features.
 

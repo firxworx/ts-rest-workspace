@@ -2,7 +2,7 @@
 
 Routes for ts-rest contracts are defined under `src/app/routes/` and loaded to the app in `src/app/app.ts`.
 
-Docs: 
+Docs:
 
 - https://fastify.dev/docs/latest/Reference/Server/
 - https://ts-rest.com/docs/core/
@@ -47,4 +47,3 @@ The `build` target in `package.json` runs `esbuild` using the config `build.ts` 
 This build configuration outputs ESM which is supported in Node 20+. This particular configuration may not be suitable for all projects. It is still common for back-end NodeJS projects to be build as CommonJS for compatibility with older versions of Node, certain libraries, and certain hosting environments.
 
 The compiled build can be run using `node apps/fastify-api/dist/main.js` from the workspace root.
-

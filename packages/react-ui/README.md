@@ -26,7 +26,7 @@ import type { Config } from 'tailwindcss'
 const tailwindConfig: Config = {
   content: [
     // ... (glob patterns for files within the project containing tailwind classes) ...
-  
+
     // include the contents of all react-* packages in the workspace
     '../../packages/react-*/src/**/*!(*.stories|*.spec|*.test).{ts,tsx,html}',
   ],
