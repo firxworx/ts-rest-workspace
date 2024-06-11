@@ -1,8 +1,11 @@
 # @workspace/tailwind
 
-Shared [tailwind preset](https://tailwindcss.com/docs/presets) for apps to use in their tailwind configuration.
+This package is home to the shared [tailwind preset](https://tailwindcss.com/docs/presets) for apps and packages to use in their tailwind configuration.
 
 This project centralizes customizations to the tailwind theme, defines global styles and custom CSS properties, adds required plugins, and overal defines how tailwind should work in this workspace.
+
+The preset also effectively installs shadcn/ui using its default palette and configuration: 
+https://ui.shadcn.com/docs/installation/manual
 
 Refer to `src/preset/index.ts`.
 
@@ -14,12 +17,14 @@ Consuming apps in the workspace should add this package as dev dependency:
 pnpm --filter my-target-project add -D @workspace/tailwind@workspace:*
 ```
 
-You may want to mirror this package's `devDependencies` in the `package.json` of your consuming project for a portable package that's ready to build or deploy anywhere. 
+Note: you may want to mirror the `devDependencies` of this package in the `package.json` of your consuming project for portability.
 
 ## Usage
 
+After installing the package import it in your app/package's `tailwind.config.ts` file:
+
 ```ts
-import { projectPreset } from '@workspace/tailwind'
+import projectPreset from '@workspace/tailwind/preset'
 ```
 
 ## Custom CSS Classes

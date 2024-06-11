@@ -39,5 +39,10 @@ const tailwindConfig: Config = {
 export default tailwindConfig
 ```
 
+## Compatibility with RSC's and NextJS
 
+`use client` directives must be added to either the barrel file `src/index.ts` or to each component file to support React Server Components (RSC's) in NextJS and other frameworks that observe this directive.
 
+At the time of writing Vite excludes these directives from its builds and will throw warnings if they are present. The plugin `rollup-plugin-preserve-directives` can be used to preserve directives such as `use client` the build output.
+
+There is also the option to add this directive to the entire bundle using a banner e.g. via the plugin `rollup-plugin-banner2`.

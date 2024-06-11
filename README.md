@@ -1,121 +1,116 @@
-# Nx with Fastify API and React UI via ts-rest
+# ts-rest with Fastify API + React/Vite UI
 
-## UPDATE This branch kills nx and replaces it entirely with pnpm workspaces
+This pnpm workspace (monorepo) features a working full-stack application created using [ts-rest](https://ts-rest.com/) backed up by [zod](https://zod.dev/) and [@tanstack/react-query](https://tanstack.com/query/latest) for type-safe client-server communication.
 
-...Its suddenly so easy to bump packages to current, nothing breaks with each update, CJS vs. ESM issues to troubleshoot at every step are eliminated... Magic!
+- React + Vite front-end with react-router + react-query + tailwindcss + shadcn/ui
+- Fastify back-end with pino logger for structured logging
 
-## Old README
+This project is ready to serve as a project boilerplate for new projects to get started quickly.
 
-An [Nx](https://nx.dev) monorepo featuring a [Fastify](https://fastify.dev/) back-end API and [React](https://react.dev/) front-end that exchange data via [ts-rest](https://ts-rest.com/).
+## Benefits
 
-API documentation based on the ts-rest contract is generated via Swagger/OpenAPI.
+ts-rest offers comparable benefits to [TRPC](https://trpc.io/) in terms of developer efficiency and developer experience except it uses JSON/REST under the hood instead of a custom stack-specific protocol that's exclusive to TRPC and the TypeScript ecosystem.
 
-ts-rest offers comparable benefits to developer efficiency and developer experience vs. [TRPC](https://trpc.io/) except it is implementing using JSON/REST under the hood.
+This repo defines ts-rest _contracts_ for blog _posts_ with CRUD operations as well as a simple _hello_ contract to illustrate how to combine multiple contracts. This is a complete working example vs. the partial snippets found in the ts-rest documentation.
 
-ts-rest includes support for Express/Fastify/NestJS and React/Vue and is designed to support incremental adoption by development teams working with legacy codebases.
+The React UI uses the react-query client provided by ts-rest to achieve a type-safe RPC-like client interface with the API that respects the contract definitions.
 
-## Resources
+The legendary [zod](https://zod.dev/) is used in contract definitions to provide data parsing and validation.
 
-https://github.com/ts-rest/ts-rest (refer to examples under both apps and libs)
+This monorepo is flexible to support swapping out the back-end or front-end stack (or parts of them) with other tools and libraries. 
 
-### About this Repo
+Unlike so many "starters" the setup is fast and `pnpm dev` + `pnpm test` + `pnpm build` actually work!
 
-The code in this repo can serve as a reference boilerplate/template for new full-stack projects.
+## Architecture
 
-The official examples in the ts-rest repo are somewhat intermixed meanwhile this repo provides a structure that is consistent with a real application. The Fastify API structure is based on the Nx generator boilerplate vs. the example which provides a more scalable foundation to build new features.
+🧭 This workspace includes
 
-The implementation of the blog is a non-functional mock sourced from examples in the ts-rest GitHub repo:
-https://github.com/ts-rest/ts-rest/tree/main/apps
+- `packages/common` - shared code and utilities for use by both UI + API
+- `packages/contracts` - ts-rest [contract definitions](https://ts-rest.com/docs/core/) implemented by UI + API
+- `packages/data` - shared zod schemas and types that define and validate data across the workspace
+- `packages/react-ui` - shared react component library with several components customized from shadcn/ui
+- `packages/style` - home to the `cn()` css utility and any `tailwind-merge` customizations
+- `packages/tailwind` - shared [tailwindcss preset](https://tailwindcss.com/docs/presets) providing a common tailwindcss config
 
-The UI is created using Vite + React + TypeScript + TailwindCSS. It includes examples of both the fetch-based and react-query-based client libraries provided by ts-rest.
+- `apps/ui` - React + Vite SPA using ts-rest's react-query client to call the API
+- `apps/fastify-api` - Fastify API server using ts-rest to implement the back-end of the contract
 
-The shared contract between the client + server is defined in `packages/common/contracts`.
+🍬 Assorted goodies include 
 
-## Architecture Value
+- fastify api build with `esbuild` and the dev server runs using `tsx watch` for fast iteration
+- working `vitest` configuration in all packages including `@testing-library/react` for testing React components
+- `supertest` with `vitest` configured in the fastify-api for testing API routes
+- workspace `eslint` and `prettier` configuration for efficient linting and formatting without OOM issues
+- `syncpack` configuration with support for pnpm's `workspace:` protocol for shared dependencies in the workspace
+- `.vscode/settings.json` for VSCode users with recommended settings for the workspace
+- each app and package has its own `README.md` with additional information and setup instructions
 
-ts-rest is arguably superior strategic choice for client-server communications in most types of real-world business applications vs. newer protocols such as TRPC, gRPC, and GraphQL.
+## Get Started 🚀
 
-There can be many advantages to embracing mature, widely-supported, and well-understood protocols that are easy to implement and maintain.
+Copy the local `.env.sample` and create `.env` in both `apps/fastify-api` and `apps/ui`.
 
-Internal stakeholders, customers, and partners across any industry can easily integrate with JSON REST API's and the _largest_ ecosystem of software and tools are at their disposal.
+If you're feeling lazy you can run the following bash script to do this for you:
 
-ts-rest provides developers with a highly productive TRPC-like experience that enhances developer efficiency and delivers end-to-end type safety: https://ts-rest.com/docs/intro
-
-## Development
-
-### Development Setup
-
-The project assumes a linux/unix environment (Windows users can use WSL2) that includes pnpm and a recent version of NodeJS.
-
-Copy `nx-cloud.env.sample` to create `nx-cloud.env`.
-
-Consider signing up for an Nx Cloud Account to provide an API key.
-If would not like to connect to Nx Cloud, edit `nx.json` and replace the `tasksRunnerOptions` block with the following:
-
-```json
-    "tasksRunnerOptions": {
-      "default": {
-        "runner": "nx/tasks-runners/default",
-        "options": {
-          "cacheableOperations": ["build", "lint", "test", "e2e"],
-        },
-      },
-    },
+```sh
+bash ./scripts/setup.sh
 ```
 
-Copy `.env.sample` to create `.env` for each of: `apps/fastify-api` and `apps/react-ui`.
+Please note all scripts in this workspace are intended for unix/linux systems.
+Windows users are encouraged to use WSL2 or make the necessary adjustments.
 
-### Development Workflow
+Install package dependencies:
 
-Run `pnpm install` to install dependencies.
-
-Run `pnpm dev` to start the development server for both the API and UI.
-
-The API runs on port 3939 and the UI runs on port 4200.
-
-A proxy configuration in `apps/react-ui/proxy.conf.json` will proxy requests to http://127.0.0.1:4200/api to the back-end API.
-
-If you make a change to the contract it is recommended to restart the development server. If your changes still don't seem to get picked up try rebuilding.
-
-## Build
-
-Run `pnpm build:all` to build the API, UI, and the shared package containing the contract.
-
-The shared contract library is configured as a "publishable" package.
-
-The package's configuration is an example of how to configure Nx's esbuild builder to compile for both CommonJS and ESM.
-
-## Using Nx to Run Tasks
-
-The following is retained from the Nx boilerplate README.
-
-To execute tasks with Nx use the following syntax:
-
-```
-pnpm nx <target> <project> <...options>
+```sh
+pnpm install
 ```
 
-You can also run multiple targets:
+### Development Workflow 🦾
 
-```
-pnpm nx run-many -t <target1> <target2>
-```
+Start the development servers of the UI and API:
 
-..or add `-p` to filter specific projects
-
-```
-pnpm nx run-many -t <target1> <target2> -p <proj1> <proj2>
+```sh
+pnpm dev
 ```
 
-Targets can be defined in the `package.json` or `projects.json`.
-Learn more [in the docs](https://nx.dev/core-features/run-tasks).
+The API runs on port `3939` and the UI runs on port `4200`.
 
-Check out the [Nx Console extensions](https://nx.dev/nx-console) for VSCode extensions and other tools for working with Nx.
+A proxy configuration in `apps/ui/vite.config.ts` will proxy requests to http://localhost:4200/api to the back-end API.
 
-## Set up CI
+If you experience ipv4 vs. ipv6 issues on MacOS or Windows you may need to revise the `vite.config.ts` and possibly other config files to use `127.0.0.1` instead of `localhost`.
 
-Nx comes with local caching already built-in (check your `nx.json`). On CI you might want to go a step further.
+#### Tests 🧪
 
-- [Set up remote caching](https://nx.dev/core-features/share-your-cache)
-- [Set up task distribution across multiple machines](https://nx.dev/core-features/distribute-task-execution)
-- [Learn more how to setup CI](https://nx.dev/recipes/ci)
+Run all tests in the workspace using `vitest`:
+
+```sh
+pnpm test
+```
+
+All `vitest` configurations work. There are a handful of example tests sprinkled throughout the workspace.
+
+## Extending this Boilerplate
+
+The mock blog in this repo is a fully functional CRUD example. It is kept simple and generated in-memory when you start the dev server using data from [faker-js](https://fakerjs.dev/).
+
+The API is nearly a blank slate for you to add your favourite database tooling to persist data.
+
+Fastify supports everything in the Node ecosystem including [Drizzle](https://orm.drizzle.team/), [Slonik](https://github.com/gajus/slonik), [Prisma](https://www.prisma.io/), [TypeORM](https://typeorm.io/), [Mongoose](https://mongoosejs.com/docs/), and more.
+
+If you would rather use a different API framework, ts-rest officially supports [NextJS](https://nextjs.org/), [NestJS](https://nestjs.com/), [Express](https://expressjs.com/), and Serverless with AWS.
+
+It can also be easily integrated with other frameworks and the community has produced examples with [Hono](https://hono.dev/) ([ts-rest-hono](https://github.com/msutkowski/ts-rest-hono)) and others.
+
+On the client-side ts-rest officially supports Vue Query, and offers a fetch client that uses the Fetch API without react-query. Custom clients are also supported. The docs provide an example of a custom client that uses `axios` instead of `fetch`.
+
+Refer to the [ts-rest docs ](https://ts-rest.com/docs/intro) for more.
+
+## Maintaining the Monorepo
+
+Run `pnpm syncpack list-mismatches` to identify dependency mismatches in the workspace.
+
+If the suggested auto-fixes look safe you can then run `pnpm syncpack fix-mismatches` to sync all package versions.
+
+Run `pnpm dedupe --check` (a safe operation) from time-to-time to maintain the lockfile and ensure optimized bundle sizes. If the proposed changes look safe run `pnpm dedupe` to apply them.
+
+Use `pnpm -r up -i` to update all the packages in the workspace.
+Add the `--latest` option to bump all packages to their latest release versions including those with possibly breaking changes.
