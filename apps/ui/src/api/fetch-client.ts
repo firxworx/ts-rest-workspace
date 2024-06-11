@@ -1,33 +1,22 @@
 import { initClient } from '@ts-rest/core'
 
-import { apiBlog } from '@workspace/contracts'
+import { apiContract } from '@workspace/contracts'
 import { API_URL } from '../constants'
 
 /**
- * Fetch client for the blog API associated with the ts-rest Blog contract.
+ * Fetch client powered by react-query for the API implementing the ts-rest contract.
+ *
+ * @see https://ts-rest.com/docs/core/custom for client customization + custom clients
+ * @see https://ts-rest.com/docs/core/fetch for api client documentation
  */
-export const fetchApi = initClient(apiBlog, {
+export const fetchApi = initClient(apiContract, {
   baseUrl: API_URL,
 
-  // example of adding a header to every request
+  // example of adding a header to every request (refer to the contract that requires this header)
   baseHeaders: {
     'x-api-key': 'key',
   },
-})
 
-// usage examples from the docs repo:
-//
-// const { body, status } = await fetchApi.createPost({
-//   body: {
-//     title: 'Post Title',
-//     body: 'Post Body',
-//   },
-// })
-//
-// if (status === 201) {
-//   // body is Post
-//   console.log(body)
-// } else {
-//   // body is unknown
-//   console.log(body)
-// }
+  // uncomment to include credentials
+  // credentials: 'same-origin',
+})

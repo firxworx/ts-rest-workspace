@@ -1,6 +1,6 @@
-import { Button, Heading } from '@workspace/react-ui'
 import React from 'react'
 import { ErrorBoundary, type FallbackProps } from 'react-error-boundary'
+import { Button, Heading } from '@workspace/react-ui'
 
 /**
  * React Error Boundary for the application.

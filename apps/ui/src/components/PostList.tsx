@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Button, Card, CardContent, CardFooter, CardHeader, CardTitle, Spinner } from '@workspace/react-ui'
+import { Button, Card, CardContent, CardFooter, CardHeader, CardTitle, LinkButton, Spinner } from '@workspace/react-ui'
 import type { Post } from '@workspace/data'
 import { cn } from '@workspace/style'
 import { apiQuery } from '../api/query-client'
@@ -15,7 +15,7 @@ export interface PostItemProps {
 }
 
 export function PostList({ pageSize = 6 }: PostListProps): JSX.Element {
-  const { isLoading, data, hasNextPage, fetchNextPage } = apiQuery.getPosts.useInfiniteQuery(
+  const { isLoading, data, hasNextPage, fetchNextPage } = apiQuery.posts.getPosts.useInfiniteQuery(
     postKeys.lists(),
     ({ pageParam = { skip: 0, take: pageSize } }) => ({
       query: {
@@ -58,10 +58,13 @@ export function PostList({ pageSize = 6 }: PostListProps): JSX.Element {
           ),
         )}
       </div>
-      <div className="mt-8">
+      <div className="mt-8 flex items-center justify-between gap-2">
         <Button variant="default" disabled={!hasNextPage} onClick={() => fetchNextPage()}>
-          More Posts
+          Load More Posts
         </Button>
+        <LinkButton variant="default" to="/posts/create">
+          Create Post
+        </LinkButton>
       </div>
     </div>
   )

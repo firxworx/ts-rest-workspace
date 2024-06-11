@@ -1,6 +1,7 @@
 import { Outlet, Link } from 'react-router-dom'
 import { Container } from '../components/Container'
 import { Logo } from '../components/Logo'
+import { SuspenseQueryBoundary } from '../components/SuspenseQueryBoundary'
 
 export function AppLayout(): JSX.Element {
   return (
@@ -14,7 +15,9 @@ export function AppLayout(): JSX.Element {
       </header>
       <main className="flex-1 bg-white py-6 sm:py-8">
         <Container>
-          <Outlet />
+          <SuspenseQueryBoundary>
+            <Outlet />
+          </SuspenseQueryBoundary>
         </Container>
       </main>
       <footer className="bg-slate-200">

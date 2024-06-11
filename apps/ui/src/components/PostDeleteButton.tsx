@@ -9,7 +9,7 @@ export interface PostDeleteButtonProps {
 export function PostDeleteButton({ postId }: PostDeleteButtonProps): JSX.Element {
   const navigate = useNavigate()
 
-  const { mutate: deletePost, isLoading } = apiQuery.deletePost.useMutation({
+  const { mutate: deletePost, isLoading } = apiQuery.posts.deletePost.useMutation({
     onSuccess: () => {
       navigate('/', { replace: true })
     },

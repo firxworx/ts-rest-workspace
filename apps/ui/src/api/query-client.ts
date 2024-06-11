@@ -1,12 +1,16 @@
 import { initQueryClient } from '@ts-rest/react-query'
 
-import { apiBlog } from '@workspace/contracts'
+import { apiContract } from '@workspace/contracts'
 import { API_URL } from '../constants'
 
 /**
- * Client powered by react-query for the blog API associated with the ts-rest Blog contract.
+ * React Query client (`@tanstack/react-query`) for the API implementing the ts-rest contract.
+ *
+ * @see https://tanstack.com/query
+ * @see https://ts-rest.com/docs/react-query
+ * @see https://ts-rest.com/docs/core/custom
  */
-export const apiQuery = initQueryClient(apiBlog, {
+export const apiQuery = initQueryClient(apiContract, {
   baseUrl: API_URL,
 
   // example of adding a header to every request (refer to the contract that requires this header)
@@ -14,6 +18,6 @@ export const apiQuery = initQueryClient(apiBlog, {
     'x-api-key': 'key',
   },
 
-  // include credentials
-  //  credentials: 'same-origin',
+  // uncomment to include credentials
+  // credentials: 'same-origin',
 })
