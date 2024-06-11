@@ -14,8 +14,7 @@ export const mockPostFixtureFactory = (partial?: Partial<Post>): Post => ({
   title: faker.lorem.sentence({ min: 3, max: 5 }),
   content: faker.lorem.paragraph({ min: 1, max: 5 }),
   description: faker.lorem.sentence({ min: 5, max: 15 }),
-  published: true,
-  tags: randomSlice(MOCK_TAGS), // ['tag1', 'tag2'],
+  tags: randomSlice(MOCK_TAGS), // e.g. ['tag1', 'tag2'],
   ...partial,
 })
 

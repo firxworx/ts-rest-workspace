@@ -1,7 +1,7 @@
 import type { FastifyInstance } from 'fastify'
 import sensiblePlugin from './plugins/sensible'
 import rootRoute from './routes/root'
-import blogRoute from './routes/blog'
+import contractRoutes from './routes/contract'
 
 export interface AppOptions {}
 
@@ -11,7 +11,7 @@ export async function app(fastify: FastifyInstance, opts: AppOptions): Promise<v
 
   // register routes
   await fastify.register(rootRoute, opts)
-  await fastify.register(blogRoute, opts)
+  await fastify.register(contractRoutes, opts)
 }
 
 /*

@@ -4,7 +4,6 @@ import { app } from './app/app.js'
 const HOST = process.env.HOST ?? 'localhost'
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3939
 
-// https://fastify.dev/docs/latest/Reference/Server/
 const fastify: FastifyInstance = Fastify({ logger: true, disableRequestLogging: false })
 
 await fastify.register(app)
@@ -30,7 +29,7 @@ const start = async (): Promise<void> => {
 
 const cleanup = async (): Promise<void> => {
   // add any cleanup code here to cleanup and close as required...
-  // await Promise.allSettled([cleanupTask(), cleanupTask2(), ...])
+  // e.g. `await Promise.allSettled([...])`
 
   await new Promise((resolve) => setTimeout(resolve, 10))
 }
