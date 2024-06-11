@@ -44,14 +44,6 @@
   },
   "private": true,
   "dependencies": {
-    "@fastify/autoload": "~5.8.3",
-    "@fastify/sensible": "~5.6.0",
-    "@fastify/swagger": "^8.14.0",
-    "@fastify/swagger-ui": "^3.0.0",
-    "@roarr/cli": "^5.12.4",
-    "@swc/helpers": "~0.5.11",
-    "@tanstack/react-query": "^4.32.6",
-    "@tanstack/react-query-devtools": "^4.32.6",
     "@ts-rest/core": "^3.45.2",
     "@ts-rest/fastify": "^3.45.2",
     "@ts-rest/open-api": "^3.45.2",
@@ -70,8 +62,6 @@
   },
   "devDependencies": {
     "@eslint/compat": "^1.0.3",
-    "@swc/cli": "~0.3.12",
-    "@swc/core": "~1.5.25",
     "@tanstack/eslint-plugin-query": "^5.35.6",
     "@testing-library/jest-dom": "^6.4.5",
     "@testing-library/react": "16.0.0",
@@ -83,12 +73,10 @@
     "@types/react-dom": "18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.11.0",
     "@typescript-eslint/parser": "^7.11.0",
-    "@vitejs/plugin-react": "^4.3.0",
-    "@vitest/coverage-c8": "~0.33.0",
+    "@vitejs/plugin-react": "^4.3.1",
     "@vitest/ui": "~1.6.0",
     "autoprefixer": "^10.4.19",
-    "cypress": "^13.11.0",
-    "esbuild": "^0.21.4",
+    "esbuild": "^0.21.5",
     "eslint": "~9.4.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-cypress": "^3.3.0",
@@ -105,17 +93,15 @@
     "postcss-discard-comments": "^7.0.0",
     "prettier": "^3.3.1",
     "prettier-plugin-tailwindcss": "^0.6.2",
+    "rimraf": "^5.0.7",
     "syncpack": "^12.3.2",
     "tailwindcss": "3.4.4",
     "tsup": "^8.1.0",
-    "tsx": "^4.13.3",
+    "tsx": "^4.15.1",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.12.0",
     "vite": "~5.2.13",
     "vite-tsconfig-paths": "^4.3.2",
     "vitest": "~1.6.0"
-  },
-  "nx": {
-    "includedScripts": []
   }
 }
