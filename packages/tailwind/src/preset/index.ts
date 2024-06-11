@@ -81,13 +81,15 @@ export const projectPreset: Partial<OptionalConfig> = {
           ...shadcnCssCustomProperties[':root'],
 
           // oklch example
+          '--P-spinner': '79.15% 0.074 232.27',
           '--P-ring': '79.15% 0.074 232.27',
         },
         '.dark': {
           'color-scheme': 'dark',
           ...shadcnCssCustomProperties['.dark'],
 
-          // oklch example
+          // oklch examples
+          '--P-spinner': '79.15% 0.074 232.27',
           '--P-ring': '42.45% 0.077 237.07',
         },
 
