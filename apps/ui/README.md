@@ -16,7 +16,7 @@ Run the UI and API dev servers together by executing `pnpm dev` from the workspa
 
 ```ts
 type ComponentProps = {
-  thing: ClientInferResponseBody<typeof contract.things.getThing, 200>;
+  thing: ClientInferResponseBody<typeof contract.things.getThing, 200>
 }
 ```
 
