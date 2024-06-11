@@ -1,23 +1,34 @@
 import { useNavigate } from 'react-router-dom'
-import { Button } from '@workspace/react-ui'
+import { useQueryClient } from '@tanstack/react-query'
+import { Button, type ButtonProps } from '@workspace/react-ui'
 import { apiQuery } from '../api/query-client'
+import { postKeys } from '../api/query-keys'
 
 export interface PostDeleteButtonProps {
   postId: string
+  variant?: ButtonProps['variant']
 }
 
-export function PostDeleteButton({ postId }: PostDeleteButtonProps): JSX.Element {
+export function PostDeleteButton({ postId, variant = 'outline' }: PostDeleteButtonProps): JSX.Element {
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
 
   const { mutate: deletePost, isLoading } = apiQuery.posts.deletePost.useMutation({
-    onSuccess: () => {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: postKeys.all() })
+      await queryClient.prefetchInfiniteQuery(postKeys.lists())
+
       navigate('/', { replace: true })
+    },
+    onError: async (error) => {
+      console.error(error)
+      await queryClient.invalidateQueries({ queryKey: postKeys.all() })
     },
   })
 
   return (
     <Button
-      variant="outline"
+      variant={variant}
       isLoading={isLoading}
       disabled={isLoading}
       onClick={() =>

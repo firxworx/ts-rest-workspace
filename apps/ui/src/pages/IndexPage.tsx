@@ -1,4 +1,4 @@
-import { Heading } from '@workspace/react-ui'
+import { Heading, LinkButton } from '@workspace/react-ui'
 import { PostList } from '../components/PostList'
 import { Link } from 'react-router-dom'
 
@@ -19,10 +19,16 @@ export function IndexPage(): JSX.Element {
           zod scheamas, react components, and utilities across a workspace.
         </p>
       </div>
-      <Heading as="h2" className="mb-6">
-        Blog Posts
-      </Heading>
-      <PostList />
+      <div className="mb-6 flex items-center justify-between">
+        <Heading as="h2" className="mb-0">
+          Blog Posts
+        </Heading>
+        <LinkButton variant="default" to="/posts/create">
+          Create Post
+        </LinkButton>
+      </div>
+
+      <PostList pageSize={8} />
     </>
   )
 }

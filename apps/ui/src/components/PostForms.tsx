@@ -1,12 +1,12 @@
+import { useCallback, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm, type FieldErrors, type SubmitHandler, type UseFormRegister } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useQueryClient } from '@tanstack/react-query'
 import { zPostUpdateRequestDto, type Post, type PostCreateRequestDto, type PostUpdateRequestDto } from '@workspace/data'
-import { apiQuery } from '../api/query-client'
 import { Button, Input, Textarea, Label } from '@workspace/react-ui'
+import { apiQuery } from '../api/query-client'
 import { postKeys } from '../api/query-keys'
-import { useCallback, useMemo } from 'react'
 
 export interface PostFormProps {
   post: Post
@@ -29,12 +29,16 @@ export interface PostFormFieldsUpdateProps {
 }
 
 /**
- * react-hook-form's internal types are historically a pain and fluctuate between even point releases.
+ * react-hook-form's internal types are historically a pain and fluctuate even between point releases.
  * Attempts to create reusable components with generics often fail due to internal type issues however
  * discriminated unions work well to provide strong typing based on the `mode` prop (the _discriminant_).
  */
 export type PostFormFieldsProps = PostFormFieldsCreateProps | PostFormFieldsUpdateProps
 
+/**
+ * Form to update (mutate) a given post vs. the API.
+ * Redirects with replace to the post view page on success.
+ */
 export function PostUpdateForm({ post }: PostFormProps): JSX.Element {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
@@ -50,11 +54,16 @@ export function PostUpdateForm({ post }: PostFormProps): JSX.Element {
   })
 
   const { mutateAsync: updatePostAsync, isLoading } = apiQuery.posts.updatePost.useMutation({
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       reset(data.body)
+
+      await queryClient.invalidateQueries({ queryKey: postKeys.all() })
+      await queryClient.prefetchInfiniteQuery(postKeys.lists())
+
       navigate(`/posts/${post.id}`, { replace: true })
     },
-    onSettled: async () => {
+    onError: async (error) => {
+      console.error(error)
       await queryClient.invalidateQueries({ queryKey: postKeys.all() })
     },
   })
@@ -102,11 +111,15 @@ export function PostCreateForm(): JSX.Element {
   })
 
   const { mutateAsync: createPostAsync, isLoading } = apiQuery.posts.createPost.useMutation({
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       reset(data.body)
+
+      await queryClient.invalidateQueries({ queryKey: postKeys.all() })
+      await queryClient.prefetchInfiniteQuery(postKeys.lists())
       navigate(`/posts/${data.body.id}`, { replace: true })
     },
-    onSettled: async () => {
+    onError: async (error) => {
+      console.error(error)
       await queryClient.invalidateQueries({ queryKey: postKeys.all() })
     },
   })

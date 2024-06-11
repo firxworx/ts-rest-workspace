@@ -6,6 +6,8 @@ export interface LogoProps {
 
 /**
  * Logo SVG component of a crown from https://lucide.dev/icons/crown.
+ * Provide a tailwind `size-*` utility via the `className` prop to override the default 'size-6'.
+ *
  * Released under Lucide's SIL license: https://lucide.dev/license.
  */
 export function Logo({ className }: LogoProps): JSX.Element {

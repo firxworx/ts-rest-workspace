@@ -2,8 +2,7 @@ import { createBrowserRouter, type RouteObject } from 'react-router-dom'
 import { AppLayout } from './layout/AppLayout'
 import { IndexPage } from './pages/IndexPage'
 import { PostCreatePage, PostUpdatePage, PostViewPage } from './pages/PostPages'
-import ErrorPage from './pages/ErrorPage'
-import NotFoundPage from './pages/NotFoundPage'
+import { ErrorPage, NotFoundPage } from './pages/ErrorPages'
 
 const rootRoutes: RouteObject[] = [
   {
@@ -26,6 +25,10 @@ const rootRoutes: RouteObject[] = [
       {
         path: '/posts/:id/update',
         element: <PostUpdatePage />,
+      },
+      {
+        path: '/404',
+        element: <NotFoundPage />,
       },
       {
         path: '*',

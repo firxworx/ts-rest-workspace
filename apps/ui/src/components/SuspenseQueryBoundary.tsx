@@ -29,7 +29,7 @@ function ErrorRetryView({ error, resetErrorBoundary }: FallbackProps): JSX.Eleme
     <div role="alert" className="flex flex-col gap-4 rounded-md bg-slate-200 p-4">
       <div className="flex flex-col gap-2">
         <Heading as="h3" styleAs="h6">
-          Error fetching data
+          Error
         </Heading>
         {error.message ? <p>{error.message}</p> : null}
       </div>
