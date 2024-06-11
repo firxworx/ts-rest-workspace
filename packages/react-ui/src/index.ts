@@ -2,6 +2,7 @@
 export * from './components/Button'
 export * from './components/Card'
 export * from './components/Heading'
+export * from './components/Separator'
 export * from './components/Spinner'
 
 // forms
@@ -11,6 +12,7 @@ export * from './components/Label'
 
 // icons
 export * from './components/icons/CheckIcon'
+export * from './components/icons/ChevronIcons'
 
 // components specific to frameworks or libraries
 export * from './components/react-router/LinkButton'
