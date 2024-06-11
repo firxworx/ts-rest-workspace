@@ -10,7 +10,7 @@ export interface SpinnerProps {
 export function Spinner({ label = 'Loading…', className }: SpinnerProps): JSX.Element {
   return (
     <div
-      role={label ? 'alert' : undefined}
+      role={label ? 'status' : undefined}
       aria-live={label ? 'polite' : undefined}
       className={cn('text-blue-600', className)}
     >
