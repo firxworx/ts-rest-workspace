@@ -6,7 +6,7 @@ export function IndexPage(): JSX.Element {
   return (
     <>
       <Heading as="h1">Home</Heading>
-      <div className="mb-8 mt-8 flex flex-col gap-4 text-lg">
+      <div className="mb-8 mt-8 flex flex-col gap-4">
         <p>
           This is an example app that uses{' '}
           <Link to="https://ts-rest.com/docs/intro" className="font-medium text-sky-800 no-underline hover:underline">

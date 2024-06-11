@@ -77,11 +77,11 @@ function PostItem({ post, className }: PostItemProps): JSX.Element {
         <CardTitle>{post.title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="text-lg">{post.description}</p>
+        <p className="text-base">{post.description}</p>
       </CardContent>
       <CardFooter className="flex flex-wrap justify-end gap-2 text-sm">
         {post.tags.map((tag) => (
-          <div key={tag} className="rounded-lg bg-slate-200 p-2">
+          <div key={tag} className="rounded-lg bg-slate-200 px-3 py-2">
             {tag}
           </div>
         ))}

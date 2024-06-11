@@ -14,6 +14,7 @@ export interface PostFormProps {
 
 export interface PostFormFieldsCreateProps {
   mode: 'create'
+  isLoading?: boolean
   register: UseFormRegister<PostCreateRequestDto>
   errors: FieldErrors<PostCreateRequestDto>
   onSubmit: React.FormEventHandler<HTMLFormElement>
@@ -21,6 +22,7 @@ export interface PostFormFieldsCreateProps {
 
 export interface PostFormFieldsUpdateProps {
   mode: 'update'
+  isLoading?: boolean
   register: UseFormRegister<PostUpdateRequestDto>
   errors: FieldErrors<PostUpdateRequestDto>
   onSubmit: React.FormEventHandler<HTMLFormElement>
@@ -47,7 +49,7 @@ export function PostUpdateForm({ post }: PostFormProps): JSX.Element {
     defaultValues: post,
   })
 
-  const { mutateAsync: updatePostAsync } = apiQuery.posts.updatePost.useMutation({
+  const { mutateAsync: updatePostAsync, isLoading } = apiQuery.posts.updatePost.useMutation({
     onSuccess: (data) => {
       reset(data.body)
       navigate(`/posts/${post.id}`, { replace: true })
@@ -74,7 +76,15 @@ export function PostUpdateForm({ post }: PostFormProps): JSX.Element {
     [onSubmit, handleSubmit],
   )
 
-  return <PostFormFields mode="update" register={register} errors={errors} onSubmit={handleSubmitAsync} />
+  return (
+    <PostFormFields
+      mode="update"
+      register={register}
+      errors={errors}
+      isLoading={isLoading}
+      onSubmit={handleSubmitAsync}
+    />
+  )
 }
 
 export function PostCreateForm(): JSX.Element {
@@ -91,7 +101,7 @@ export function PostCreateForm(): JSX.Element {
     defaultValues: { title: '', description: '', content: '' },
   })
 
-  const { mutateAsync: createPostAsync } = apiQuery.posts.createPost.useMutation({
+  const { mutateAsync: createPostAsync, isLoading } = apiQuery.posts.createPost.useMutation({
     onSuccess: (data) => {
       reset(data.body)
       navigate(`/posts/${data.body.id}`, { replace: true })
@@ -117,10 +127,24 @@ export function PostCreateForm(): JSX.Element {
     [onSubmit, handleSubmit],
   )
 
-  return <PostFormFields mode="create" register={register} errors={errors} onSubmit={handleSubmitAsync} />
+  return (
+    <PostFormFields
+      mode="create"
+      register={register}
+      errors={errors}
+      isLoading={isLoading}
+      onSubmit={handleSubmitAsync}
+    />
+  )
 }
 
-export function PostFormFields({ mode: _mode, register, errors, onSubmit }: PostFormFieldsProps): JSX.Element {
+export function PostFormFields({
+  mode: _mode,
+  register,
+  errors,
+  isLoading,
+  onSubmit,
+}: PostFormFieldsProps): JSX.Element {
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-4">
       <div className="flex flex-col gap-1.5">
@@ -142,12 +166,14 @@ export function PostFormFields({ mode: _mode, register, errors, onSubmit }: Post
       </div>
 
       <div>
-        <Button type="submit">Save</Button>
+        <Button type="submit" isLoading={isLoading}>
+          Save
+        </Button>
       </div>
     </form>
   )
 }
 
 export function InputError({ children }: React.PropsWithChildren): JSX.Element {
-  return <div className="text-destructive text-sm">{children}</div>
+  return <div className="text-destructive text-xs">{children}</div>
 }
