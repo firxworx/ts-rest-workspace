@@ -7,6 +7,10 @@ export const postKeys = {
   detail: (id: string) => {
     return [...postKeys.all(), id] as const
   },
+
+  // cannot use the same cache key for useQuery + useInfiniteQuery
+  // https://tkdodo.eu/blog/effective-react-query-keys#caching-data
+  infinite: () => ['infinitePosts'] as const,
 }
 
 /**

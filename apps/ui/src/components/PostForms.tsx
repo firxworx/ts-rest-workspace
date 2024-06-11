@@ -4,11 +4,9 @@ import { useForm, type FieldErrors, type SubmitHandler, type UseFormRegister } f
 import { zodResolver } from '@hookform/resolvers/zod'
 import { zPostUpdateRequestDto, type Post, type PostCreateRequestDto, type PostUpdateRequestDto } from '@workspace/data'
 import { Button, Input, Textarea, Label } from '@workspace/react-ui'
+import { useQueryClient } from '@tanstack/react-query'
 import { apiQuery } from '../api/query-client'
 import { postKeys } from '../api/query-keys'
-import { useTsRestQueryClient } from '@ts-rest/react-query'
-import { useQueryClient } from '@tanstack/react-query'
-import { DEFAULT_PAGE_SIZE } from '../constants'
 
 export interface PostFormProps {
   post: Post
@@ -44,7 +42,6 @@ export type PostFormFieldsProps = PostFormFieldsCreateProps | PostFormFieldsUpda
 export function PostUpdateForm({ post }: PostFormProps): JSX.Element {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
-  const tsrQueryClient = useTsRestQueryClient(apiQuery)
 
   const {
     register,
@@ -60,21 +57,16 @@ export function PostUpdateForm({ post }: PostFormProps): JSX.Element {
     onSuccess: async (data) => {
       reset(data.body)
 
-      await queryClient.invalidateQueries(postKeys.all())
-      await tsrQueryClient.posts.getPosts.prefetchInfiniteQuery(postKeys.lists(), () => {
-        return {
-          query: {
-            skip: 0,
-            take: DEFAULT_PAGE_SIZE,
-          },
-        }
-      })
+      await queryClient.invalidateQueries(postKeys.detail(data.body.id))
+      await queryClient.invalidateQueries(postKeys.lists())
+      await queryClient.invalidateQueries(postKeys.infinite())
 
       navigate(`/posts/${post.id}`, { replace: true })
     },
     onError: async (error) => {
       console.error(error)
-      await queryClient.invalidateQueries({ queryKey: postKeys.all() })
+      await queryClient.invalidateQueries(postKeys.all())
+      await queryClient.invalidateQueries(postKeys.infinite())
     },
   })
 
@@ -124,12 +116,14 @@ export function PostCreateForm(): JSX.Element {
     onSuccess: async (data) => {
       reset(data.body)
 
-      await queryClient.invalidateQueries({ queryKey: postKeys.all() })
+      await queryClient.invalidateQueries(postKeys.lists())
+      await queryClient.invalidateQueries(postKeys.infinite())
       navigate('/', { replace: true })
     },
     onError: async (error) => {
       console.error(error)
-      await queryClient.invalidateQueries({ queryKey: postKeys.all() })
+      await queryClient.invalidateQueries(postKeys.lists())
+      await queryClient.invalidateQueries(postKeys.infinite())
     },
   })
 

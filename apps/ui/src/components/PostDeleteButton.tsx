@@ -21,12 +21,17 @@ export function PostDeleteButton({ postId, variant = 'outline', onDeleteClick }:
     error,
   } = apiQuery.posts.deletePost.useMutation({
     onSuccess: async () => {
-      await queryClient.invalidateQueries(postKeys.all())
+      queryClient.removeQueries(postKeys.detail(postId))
+
+      await queryClient.invalidateQueries(postKeys.lists())
+      await queryClient.invalidateQueries(postKeys.infinite())
+
       navigate('/', { replace: true })
     },
     onError: async (error) => {
       console.error(error)
-      await queryClient.invalidateQueries({ queryKey: postKeys.all() })
+      await queryClient.invalidateQueries(postKeys.all())
+      await queryClient.invalidateQueries(postKeys.lists())
     },
   })
 

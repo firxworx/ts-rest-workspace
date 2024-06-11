@@ -31,7 +31,7 @@ export function PostList({ pageSize = DEFAULT_PAGE_SIZE }: PostListProps): JSX.E
   const { ref: loadMoreRef, inView } = useInView({ threshold: 1 })
 
   const { isLoading, isFetchingNextPage, data, hasNextPage, fetchNextPage } = apiQuery.posts.getPosts.useInfiniteQuery(
-    postKeys.lists(),
+    postKeys.infinite(),
     ({ pageParam = { skip: 0, take: pageSize } }) => ({
       query: {
         skip: pageParam.skip,
