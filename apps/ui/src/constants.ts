@@ -20,3 +20,8 @@ export const IS_CLIENT = !import.meta.env.SSR
 if (!API_URL) {
   throw new Error('VITE_API_URL is not defined')
 }
+
+/**
+ * Default page size for paginated and infinite queries.
+ */
+export const DEFAULT_PAGE_SIZE = 6 as const

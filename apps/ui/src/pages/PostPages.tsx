@@ -1,10 +1,12 @@
-import { useNavigate, useParams } from 'react-router-dom'
+import { useState } from 'react'
+import { useParams, Navigate } from 'react-router-dom'
 import { apiQuery } from '../api/query-client'
 import { PostView } from '../components/PostView'
 import { postKeys } from '../api/query-keys'
-import { Heading, LinkButton, Spinner, Separator, ChevronLeftIcon } from '@workspace/react-ui'
+import { Heading, LinkButton, Spinner, Separator } from '@workspace/react-ui'
 import { PostCreateForm, PostUpdateForm } from '../components/PostForms'
 import { PostDeleteButton } from '../components/PostDeleteButton'
+import { BackHomeLinkButton } from '../components/BackHomeLinkButton'
 
 export interface PostPageProps {
   context: 'view' | 'edit' | 'create'
@@ -12,6 +14,7 @@ export interface PostPageProps {
 
 export interface PostToolbarProps {
   postId: string
+  onDeletePostClick?: () => void
 }
 
 export function PostCreatePage(): JSX.Element {
@@ -62,7 +65,7 @@ export function PostUpdatePage(): JSX.Element | null {
 
 export function PostViewPage(): JSX.Element | null {
   const { id } = useParams()
-  const navigate = useNavigate()
+  const [isDeleted, setIsDeleted] = useState<boolean>(false)
 
   if (!id) {
     return null
@@ -74,14 +77,13 @@ export function PostViewPage(): JSX.Element | null {
       params: { id: id || '' },
     },
     {
-      enabled: id !== undefined,
+      enabled: !!id && !isDeleted,
     },
   )
 
-  if (error) {
-    if (error.status === 404) {
-      navigate('/404', { replace: true })
-      return null
+  if (error && !isLoading) {
+    if (error.status === 404 && !isDeleted) {
+      return <Navigate to="/404" replace={true} />
     }
 
     return <div className="strong text-lg">Error fetching post data</div>
@@ -96,23 +98,20 @@ export function PostViewPage(): JSX.Element | null {
       <PostView post={data.body} />
       <Separator className="mt-12" />
       <aside className="mt-4 flex items-center justify-between gap-4">
-        <PostToolbar postId={data.body.id} />
+        <PostToolbar postId={data.body.id} onDeletePostClick={() => setIsDeleted(true)} />
       </aside>
     </>
   )
 }
 
-function PostToolbar({ postId }: PostToolbarProps): JSX.Element {
+function PostToolbar({ postId, onDeletePostClick }: PostToolbarProps): JSX.Element {
   return (
     <div className="flex w-full items-center justify-between">
       <div className="flex-1">
-        <LinkButton variant="outline" to={'/'} className="inline-flex items-center">
-          <ChevronLeftIcon className="me-1 inline-block size-4" />
-          <span className="leading-none">Home</span>
-        </LinkButton>
+        <BackHomeLinkButton />
       </div>
       <div className="flex items-center gap-4">
-        <PostDeleteButton variant="default" postId={postId} />
+        <PostDeleteButton variant="default" postId={postId} onDeleteClick={onDeletePostClick} />
         <LinkButton variant="default" to={`/posts/${postId}/update`}>
           Edit
         </LinkButton>

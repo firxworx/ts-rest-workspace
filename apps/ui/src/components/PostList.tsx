@@ -16,6 +16,7 @@ import type { Post } from '@workspace/data'
 import { cn } from '@workspace/style'
 import { apiQuery } from '../api/query-client'
 import { postKeys } from '../api/query-keys'
+import { DEFAULT_PAGE_SIZE } from '../constants'
 
 export interface PostListProps {
   pageSize?: number
@@ -26,7 +27,7 @@ export interface PostItemProps {
   className?: string
 }
 
-export function PostList({ pageSize = 6 }: PostListProps): JSX.Element {
+export function PostList({ pageSize = DEFAULT_PAGE_SIZE }: PostListProps): JSX.Element {
   const { ref: loadMoreRef, inView } = useInView({ threshold: 1 })
 
   const { isLoading, isFetchingNextPage, data, hasNextPage, fetchNextPage } = apiQuery.posts.getPosts.useInfiniteQuery(
