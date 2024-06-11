@@ -52,6 +52,12 @@ Unlike so many "starters" the setup is fast and `pnpm dev` + `pnpm test` + `pnpm
 
 ### 🛠️ Installation
 
+Create a copy of this repo using GitHub's [Template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) feature or use [degit](https://github.com/Rich-Harris/degit):
+
+```sh
+pnpm dlx degit firxworx/ts-rest-workspace my-project
+```
+
 Copy the local `.env.sample` and create `.env` in both `apps/fastify-api` and `apps/ui`.
 
 If you're feeling lazy there's a bash script to do it for you:
