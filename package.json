@@ -1,8 +1,14 @@
 {
-  "name": "rfx-nx-ts-rest",
+  "name": "ts-rest-workspace",
   "version": "0.0.0",
   "license": "MIT",
   "type": "module",
+  "private": true,
+  "author": {
+    "name": "Kevin Firko",
+    "email": "hello@firxworx.com",
+    "url": "https://firxworx.com"
+  },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "dev": "NODE_ENV=development pnpm --recursive --stream run dev",
