@@ -9,17 +9,9 @@ export async function app(fastify: FastifyInstance, opts: AppOptions): Promise<v
   // register plugins
   await fastify.register(sensiblePlugin, opts)
 
-  // register routes
+  // register an example route that's not part of the ts-rest contract
   await fastify.register(rootRoute, opts)
+
+  // register ts-rest contract routes
   await fastify.register(contractRoutes, opts)
 }
-
-/*
- * Note: to customize error handling in fastify with ts-rest
- *
- * - `inititServer().registerRouter()`'s requestValidationErrorHandler option is equivalent to calling
- *   `fastify.setErrorHandler(requestValidationErrorHandler(options.requestValidationErrorHandler))`
- *
- * @see https://github.com/ts-rest/ts-rest/libs/ts-rest/fastify/src/lib/ts-rest-fastify.ts
- * @see https://ts-rest.com/docs/fastify/
- */

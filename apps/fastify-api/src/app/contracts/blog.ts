@@ -1,10 +1,8 @@
 import { initServer } from '@ts-rest/fastify'
-
+import { ZodError } from 'zod'
 import { zPost, type Post } from '@workspace/data'
 import { apiContract } from '@workspace/contracts'
-
 import { mockPostFixtureFactory } from '../../helpers/mock-posts'
-import { ZodError } from 'zod'
 
 const DEFAULT_SKIP = 0
 const DEFAULT_TAKE = 5
@@ -71,6 +69,7 @@ export const postsContractRouter = s.router(apiContract.posts, {
     }
 
     try {
+      // note ts-rest has already validated the body using zPostUpdateRequestDto schema per the contract
       const updatedPost = zPost.parse({ ...RANDOM_POSTS[postIndex], ...body, id })
       RANDOM_POSTS[postIndex] = updatedPost
 

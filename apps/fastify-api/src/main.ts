@@ -20,6 +20,12 @@ fastify.addHook('onClose', (_instance, done) => {
 
 const start = async (): Promise<void> => {
   try {
+    await fastify.ready()
+
+    // debug helpers --
+    // console.info(fastify.printPlugins())
+    // console.info(fastify.printRoutes())
+
     await fastify.listen({ host: HOST, port: PORT })
   } catch (error: unknown) {
     fastify.log.error(error)
@@ -39,7 +45,7 @@ const exit = async (): Promise<void> => {
     await fastify.close()
     process.exit(0)
   } catch (error: unknown) {
-    fastify.log.error('Error shutting down server')
+    fastify.log.warn('Error shutting down server')
     fastify.log.error(error)
     process.exit(1)
   }
