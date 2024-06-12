@@ -11,19 +11,13 @@ import eslintPluginEslintComments from 'eslint-plugin-eslint-comments'
 import eslintPluginReactRefresh from 'eslint-plugin-react-refresh'
 import eslintPluginReactHooks from 'eslint-plugin-react-hooks'
 import eslintPluginJsxA11y from 'eslint-plugin-jsx-a11y'
+import * as eslintPluginReactQuery from '@tanstack/eslint-plugin-query'
 
 import reactJsxRuntime from 'eslint-plugin-react/configs/jsx-runtime.js'
 import reactRecommended from 'eslint-plugin-react/configs/recommended.js'
 
 // helpers from this package fix pre-v9 plugin rules to enable v9 compatibility
 import { fixupPluginRules } from '@eslint/compat'
-
-/**
- * TODO TODO TODO
- * @todo add eslint-plugin-query https://tanstack.com/query/latest/docs/eslint/eslint-plugin-query
- * @todo consider tanstack router
- * @todo consider tanstack forms
- */
 
 /**
  * eslint v9 configuration using the config helper function from `typescript-eslint`.
@@ -193,6 +187,9 @@ export default tseslint.config(
 
       // @ts-expect-error -- upstream type issue (tseslint #9115) https://github.com/eslint/rewrite/issues/25
       'react-hooks': fixupPluginRules(eslintPluginReactHooks),
+
+      // @ts-expect-error -- upstream type issue (tseslint #9115) https://github.com/eslint/rewrite/issues/25
+      '@tanstack/query': fixupPluginRules(eslintPluginReactQuery),
     },
     languageOptions: {
       ...reactRecommended.languageOptions,
@@ -237,6 +234,10 @@ export default tseslint.config(
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'error',
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+
+      '@tanstack/query/stable-query-client': 'error',
+      '@tanstack/query/no-rest-destructuring': 'error',
+      '@tanstack/query/exhaustive-deps': 'error',
 
       ...eslintPluginJsxA11y.configs.recommended.rules,
     },

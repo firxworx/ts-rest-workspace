@@ -7,52 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      '@ts-rest/core':
-        specifier: ^3.45.2
-        version: 3.45.2(zod@3.23.8)
-      '@ts-rest/fastify':
-        specifier: ^3.45.2
-        version: 3.45.2(fastify@4.27.0)(zod@3.23.8)
-      '@ts-rest/open-api':
-        specifier: ^3.45.2
-        version: 3.45.2(zod@3.23.8)
-      '@ts-rest/react-query':
-        specifier: ^3.45.2
-        version: 3.45.2(@tanstack/react-query@5.40.1(react@18.3.1))(react@18.3.1)(zod@3.23.8)
-      axios:
-        specifier: ^1.7.2
-        version: 1.7.2
-      clsx:
-        specifier: ^2.1.1
-        version: 2.1.1
-      fastify:
-        specifier: ~4.27.0
-        version: 4.27.0
-      fastify-plugin:
-        specifier: ~4.5.1
-        version: 4.5.1
-      react:
-        specifier: 18.3.1
-        version: 18.3.1
-      react-dom:
-        specifier: 18.3.1
-        version: 18.3.1(react@18.3.1)
-      react-error-boundary:
-        specifier: ^4.0.13
-        version: 4.0.13(react@18.3.1)
-      react-router-dom:
-        specifier: ^6.23.1
-        version: 6.23.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      tailwind-merge:
-        specifier: ^2.3.0
-        version: 2.3.0
-      tslib:
-        specifier: ^2.6.3
-        version: 2.6.3
-      zod:
-        specifier: ^3.23.8
-        version: 3.23.8
     devDependencies:
       '@eslint/compat':
         specifier: ^1.0.3
@@ -159,6 +113,9 @@ importers:
       tailwindcss:
         specifier: 3.4.4
         version: 3.4.4(ts-node@10.9.2(@swc/core@1.5.25)(@types/node@20.14.2)(typescript@5.4.5))
+      tslib:
+        specifier: ^2.6.3
+        version: 2.6.3
       tsup:
         specifier: ^8.1.0
         version: 8.1.0(@microsoft/api-extractor@7.47.0(@types/node@20.14.2))(@swc/core@1.5.25)(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.5.25)(@types/node@20.14.2)(typescript@5.4.5))(typescript@5.4.5)
@@ -1489,9 +1446,6 @@ packages:
   '@tanstack/query-core@4.36.1':
     resolution: {integrity: sha512-DJSilV5+ytBP1FbFcEJovv4rnnm/CokuVvrBEtW/Va9DvuJ3HksbXUJEpI0aV1KtuL4ZoO9AVE6PyNLzF7tLeA==}
 
-  '@tanstack/query-core@5.40.0':
-    resolution: {integrity: sha512-eD8K8jsOIq0Z5u/QbvOmfvKKE/XC39jA7yv4hgpl/1SRiU+J8QCIwgM/mEHuunQsL87dcvnHqSVLmf9pD4CiaA==}
-
   '@tanstack/query-devtools@5.37.1':
     resolution: {integrity: sha512-XcG4IIHIv0YQKrexTqo2zogQWR1Sz672tX2KsfE9kzB+9zhx44vRKH5si4WDILE1PIWQpStFs/NnrDQrBAUQpg==}
 
@@ -1512,11 +1466,6 @@ packages:
         optional: true
       react-native:
         optional: true
-
-  '@tanstack/react-query@5.40.1':
-    resolution: {integrity: sha512-gOcmu+gpFd2taHrrgMM9RemLYYEDYfsCqszxCC0xtx+csDa4R8t7Hr7SfWXQP13S2sF+mOxySo/+FNXJFYBqcA==}
-    peerDependencies:
-      react: ^18.0.0
 
   '@tanstack/react-table@8.17.3':
     resolution: {integrity: sha512-5gwg5SvPD3lNAXPuJJz1fOCEZYk9/GeBFH3w/hCgnfyszOIzwkwgp5I7Q4MJtn0WECp84b5STQUDdmvGi8m3nA==}
@@ -1976,9 +1925,6 @@ packages:
   axe-core@4.7.0:
     resolution: {integrity: sha512-M0JtH+hlOL5pLQwHOLNYZaXuhqmvS8oExsqB1SBYgA4Dk7u/xx+YdGHXaK5pyUfed5mYXdlYiphWq3G8cRi5JQ==}
     engines: {node: '>=4'}
-
-  axios@1.7.2:
-    resolution: {integrity: sha512-2A8QhOMrbomlDuiLeK9XibIBzuHeRcqqNOHp0Cyp5EoJ1IFDh+XZH3A6BkXtv0K4gFGCI0Y4BM7B1wOEi0Rmgw==}
 
   axobject-query@3.2.1:
     resolution: {integrity: sha512-jsyHu61e6N4Vbz/v18DHwWYKK0bSWLqn47eeDSKPB7m8tqMHF9YJ+mhIk2lVteyZrY8tnSj/jHOv4YiTCuCJgg==}
@@ -2589,15 +2535,6 @@ packages:
 
   flatted@3.3.1:
     resolution: {integrity: sha512-X8cqMLLie7KsNUDSdzeN8FYK9rEt4Dt67OsG/DNGnYTSDBG4uFAJFBnUeiV+zCVAvwFy56IjM9sH51jVaEhNxw==}
-
-  follow-redirects@1.15.6:
-    resolution: {integrity: sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
 
   for-each@0.3.3:
     resolution: {integrity: sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==}
@@ -3567,9 +3504,6 @@ packages:
     resolution: {integrity: sha512-llQsMLSUDUPT44jdrU/O37qlnifitDP+ZwrmmZcoSKyLKvtZxpyV0n2/bD/N4tBAAZ/gJEdZU7KMraoK1+XYAg==}
     engines: {node: '>= 0.10'}
 
-  proxy-from-env@1.1.0:
-    resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
-
   psl@1.9.0:
     resolution: {integrity: sha512-E/ZsdU4HLs/68gYzgGTkMicWTLPdAftJLfJFlLUAAKZGkStNU72sZjT66SnMDVOfOWY/YAoiD7Jxa9iHvngcag==}
 
@@ -3603,11 +3537,6 @@ packages:
     resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
     peerDependencies:
       react: ^18.3.1
-
-  react-error-boundary@4.0.13:
-    resolution: {integrity: sha512-b6PwbdSv8XeOSYvjt8LpgpKrZ0yGdtZokYwkwV2wlcZbxgopHX/hgPl5VgpnoVOWd868n1hktM8Qm4b+02MiLQ==}
-    peerDependencies:
-      react: '>=16.13.1'
 
   react-hook-form@7.51.5:
     resolution: {integrity: sha512-J2ILT5gWx1XUIJRETiA7M19iXHlG74+6O3KApzvqB/w8S5NQR7AbU8HVZrMALdmDgWpRPYiZJl0zx8Z4L2mP6Q==}
@@ -5279,8 +5208,6 @@ snapshots:
 
   '@tanstack/query-core@4.36.1': {}
 
-  '@tanstack/query-core@5.40.0': {}
-
   '@tanstack/query-devtools@5.37.1': {}
 
   '@tanstack/react-query-devtools@5.40.1(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
@@ -5296,11 +5223,6 @@ snapshots:
       use-sync-external-store: 1.2.2(react@18.3.1)
     optionalDependencies:
       react-dom: 18.3.1(react@18.3.1)
-
-  '@tanstack/react-query@5.40.1(react@18.3.1)':
-    dependencies:
-      '@tanstack/query-core': 5.40.0
-      react: 18.3.1
 
   '@tanstack/react-table@8.17.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
@@ -5366,13 +5288,6 @@ snapshots:
   '@ts-rest/react-query@3.45.2(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(zod@3.23.8)':
     dependencies:
       '@tanstack/react-query': 4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react: 18.3.1
-    optionalDependencies:
-      zod: 3.23.8
-
-  '@ts-rest/react-query@3.45.2(@tanstack/react-query@5.40.1(react@18.3.1))(react@18.3.1)(zod@3.23.8)':
-    dependencies:
-      '@tanstack/react-query': 5.40.1(react@18.3.1)
       react: 18.3.1
     optionalDependencies:
       zod: 3.23.8
@@ -5852,14 +5767,6 @@ snapshots:
       fastq: 1.17.1
 
   axe-core@4.7.0: {}
-
-  axios@1.7.2:
-    dependencies:
-      follow-redirects: 1.15.6
-      form-data: 4.0.0
-      proxy-from-env: 1.1.0
-    transitivePeerDependencies:
-      - debug
 
   axobject-query@3.2.1:
     dependencies:
@@ -6635,8 +6542,6 @@ snapshots:
       keyv: 4.5.4
 
   flatted@3.3.1: {}
-
-  follow-redirects@1.15.6: {}
 
   for-each@0.3.3:
     dependencies:
@@ -7544,8 +7449,6 @@ snapshots:
       forwarded: 0.2.0
       ipaddr.js: 1.9.1
 
-  proxy-from-env@1.1.0: {}
-
   psl@1.9.0: {}
 
   punycode@2.3.1: {}
@@ -7572,11 +7475,6 @@ snapshots:
       loose-envify: 1.4.0
       react: 18.3.1
       scheduler: 0.23.2
-
-  react-error-boundary@4.0.13(react@18.3.1):
-    dependencies:
-      '@babel/runtime': 7.24.7
-      react: 18.3.1
 
   react-hook-form@7.51.5(react@18.3.1):
     dependencies:
