@@ -10,7 +10,7 @@ This project is ready to serve as a project boilerplate for new projects to get 
 ## 👀 Preview
 
 <p align="center">
-![UI Screenshot](https://media.firxworx.com/projects/ts-rest-workspace/screenshots/v1/ts-rest-workspace-screen-home-crop-sm.png)
+<img src="https://media.firxworx.com/projects/ts-rest-workspace/screenshots/v1/ts-rest-workspace-screen-home-crop-sm.png" alt="Preview Screenshot" />
 </p>
 
 ## 🔥 Benefits
