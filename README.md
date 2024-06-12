@@ -7,6 +7,12 @@ This pnpm workspace (monorepo) features a working full-stack application created
 
 This project is ready to serve as a project boilerplate for new projects to get started quickly.
 
+## 👀 Preview
+
+<p align="center">
+![UI Screenshot](https://media.firxworx.com/projects/ts-rest-workspace/screenshots/v1/ts-rest-workspace-screen-home-crop-sm.png)
+</p>
+
 ## 🔥 Benefits
 
 ts-rest offers comparable benefits to [TRPC](https://trpc.io/) in terms of developer efficiency and developer experience except it uses JSON/REST under the hood instead of a custom stack-specific protocol that's exclusive to TRPC and the TypeScript ecosystem.
