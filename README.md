@@ -42,7 +42,6 @@ Unlike so many "starters" the setup is fast and `pnpm dev` + `pnpm test` + `pnpm
 - `packages/style` - home to the `cn()` css utility and any `tailwind-merge` customizations
 - `packages/tailwind` - shared [tailwindcss preset](https://tailwindcss.com/docs/presets) providing a common tailwindcss config
 
-
 ### Assorted goodies include 🍬🍬
 
 - fastify api build with `esbuild` with the dev server running using `tsx watch` for fast iteration
@@ -81,7 +80,7 @@ Install dependencies:
 pnpm install
 ```
 
-### 🦾 Development 
+### 🦾 Development
 
 Start the dev server for the UI and API:
 
@@ -96,7 +95,7 @@ A proxy configuration in `apps/ui/vite.config.ts` proxies requests to http://loc
 > [!TIP]
 > If you experience ipv4 vs. ipv6 issues on MacOS or Windows you may need to revise `vite.config.ts` and potentially other config files to use `127.0.0.1` instead of `localhost`.
 
-### 🧪 Testing 
+### 🧪 Testing
 
 Run all tests in the workspace using `vitest`:
 
@@ -203,7 +202,7 @@ pnpm syncpack fix-mismatches
 
 ### 🦅 Dedupe
 
-Run `pnpm dedupe --check` (a safe operation) from time-to-time to maintain the lockfile and ensure optimized bundle sizes. 
+Run `pnpm dedupe --check` (a safe operation) from time-to-time to maintain the lockfile and ensure optimized bundle sizes.
 
 If the proposed changes look safe run `pnpm dedupe` to apply them.
 

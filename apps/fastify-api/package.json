@@ -25,6 +25,7 @@
     "@workspace/common": "workspace:*",
     "@workspace/contracts": "workspace:*",
     "@workspace/data": "workspace:*",
+    "fastify": "^4.27.0",
     "fastify-plugin": "~4.5.1",
     "zod": "^3.23.8"
   },
