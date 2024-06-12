@@ -11,9 +11,9 @@
   },
   "scripts": {
     "dev": "tsx watch src/main.ts",
+    "check": "tsc --noEmit",
     "build": "pnpm check && rimraf dist && tsx build.ts",
     "lint": "eslint src --config ../../eslint.config.js",
-    "check": "tsc --noEmit",
     "test": "vitest"
   },
   "dependencies": {

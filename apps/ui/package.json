@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "check": "tsc --noEmit",
     "build": "tsc && NODE_ENV=production vite build",
     "lint": "eslint . --config ../../eslint.config.js --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
