@@ -13,7 +13,7 @@
     "dev": "tsx watch src/main.ts",
     "check": "tsc --noEmit",
     "build": "pnpm check && rimraf dist && tsx build.ts",
-    "lint": "eslint src --config ../../eslint.config.js",
+    "lint": "eslint src --config ../../eslint.config.js --report-unused-disable-directives --max-warnings 0",
     "test": "vitest"
   },
   "dependencies": {
