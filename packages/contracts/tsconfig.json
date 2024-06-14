@@ -30,5 +30,6 @@
 
     // relax exact optional property types for friendlier type definitions for front-end patterns
     "exactOptionalPropertyTypes": false
-  }
+  },
+  "include": ["src/**/*.ts"]
 }
