@@ -7,7 +7,7 @@ Docs:
 - https://fastify.dev/docs/latest/Reference/Server/
 - https://ts-rest.com/docs/core/
 
-To enable response validation for maximum rigour or to customize the error handling refer to where the ts-rest contract routes are added to the fastify app: `src/app/routes/contract`. 
+To enable response validation for maximum rigour or to customize the error handling refer to where the ts-rest contract routes are added to the fastify app: `src/app/routes/contract`.
 
 Docs: https://ts-rest.com/docs/fastify/#request-validation-error-handling
 

@@ -29,6 +29,6 @@ You can run the example build script via the `build:tsup` script in `package.jso
 pnpm --filter @workspace/contracts build:tsup
 ```
 
-A different script name is intentionally used vs. `build` so that it is differentiated from the workspace `build` command.
+The script name/target `build:tsup` is used vs. `build` so that it is differentiated from the workspace `build` command.
 
 The `tsconfig.json` of this package specifies `include: ["src/**/*.ts"]` so that `tsup` is not confused during the build process: otherwise after outputting types for the first ESM/CJS format it processes it'll get confused by the generated `.d.ts` files and fail when working on outputting the second format.
